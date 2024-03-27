@@ -22,7 +22,7 @@ public class PostController {
     @GetMapping("/company/posts")
     public String companyPosts(HttpServletRequest request) { // 이 페이지는 포스트들을 확인할 수 있는 페이지라 이름 변경했습니다.
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Post> postList =postService.getResumeList(sessionUser.getId());
+        List<Post> postList = postService.getResumeList(sessionUser.getId());
         request.setAttribute("postlist", postList);
         return "company/posts";
     }
@@ -52,9 +52,10 @@ public class PostController {
     }
 
     @PostMapping("/company/posts/{id}/update")
-    public String companyUpdatePost(@PathVariable int id, HttpServletRequest request) {
+    public String companyUpdatePost(@PathVariable int id, PostRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-//        return "redirect:/company/posts" + id;
+        System.out.println(reqDTO);
+        postService.updatePost(id, sessionUser.getId(), reqDTO);
         return "redirect:/company/posts/" + id;
     }
 
