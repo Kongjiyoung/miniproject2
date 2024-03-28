@@ -35,7 +35,7 @@ public class OfferController {
     // company의 offers 관리
     // skill 만 불러오면 되나.?
     @GetMapping("/company/offers")
-    public String personPost(HttpServletRequest request) {
+    public String companyResumes(HttpServletRequest request) {
 
         return "company/offers";
     }
@@ -56,15 +56,6 @@ public class OfferController {
 
 
 
-    @GetMapping("/company/update-info-form")
-    public String noFinded() {
-        return "company/update-info-form";
-    }
-
-    @GetMapping("/company/offer-form/")
-    public String noFinded2() {
-        return "company/offer-form";
-    }
 
 
 }
