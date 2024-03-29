@@ -3,11 +3,16 @@ package com.many.miniproject1.scrap;
 
 import com.many.miniproject1.offer.OfferJPARepository;
 import jakarta.persistence.EntityManager;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Optional;
 
 
@@ -30,7 +35,7 @@ public class ScrapJPARepositoryTest {
         // then
         // assertThat(scrapList.get(1).getId()).isEqualTo(2);
     }
-  
+
     @Test
     public void findByUserIdJoinSkill_test() {
         // given
@@ -47,8 +52,23 @@ public class ScrapJPARepositoryTest {
         int userId = 14;
         int resumeId = 1;
         // when
-        Optional<Scrap> scrap = scrapJPARepository.findByResumeIdAndSkillAndUser(userId,resumeId);
+        Optional<Scrap> scrap = scrapJPARepository.findByResumeIdAndSkillAndUser(userId, resumeId);
         System.out.println("test::: " + scrap);
         // then
+    }
+
+    @Test
+    public void findByIdJoinPostAndSkill_test() {
+        // given
+        int scrapId = 28;
+
+        // when
+        Scrap scrap = scrapJPARepository.findByIdJoinPostAndSkill(scrapId);
+
+        // then
+//        System.out.println("findByIdJoinPostAndSkill_test: " + scrap);
+//        System.out.println("포스트: " + scrap.getPost());
+//        System.out.println("스킬리스트: " + scrap.getPost().getSkillList());
+        assertThat(scrap.getPost().getSkillList().size()).isEqualTo(3);
     }
 }

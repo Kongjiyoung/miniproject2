@@ -58,4 +58,6 @@ public class ScrapService {
     public List<Scrap> companyScrapList(Integer userId){
         return scrapJPARepository.findByUserIdJoinSkillAndResume(userId);
     }
+
+//public Scrap
 }
