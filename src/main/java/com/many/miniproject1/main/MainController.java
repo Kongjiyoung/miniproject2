@@ -89,6 +89,19 @@ public class MainController {
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
 
+
+        request.setAttribute("sessionuser", sessionUser);
+
+        return "person/main";
+    }
+
+    @GetMapping("/posts/{id}")
+    public String postDetailForm(@PathVariable int id, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        // 목적: 로그인 하지 않아도 회사에서 올린 공고가 보임
+        Post post = mainService.getPostDetail(id);
+
         Boolean isCompany = false;
         // 로그인을 하지 않으면 세션유저가 없어서 주석을 걸어놓음
         //기업인지 개인인지 구분
@@ -101,19 +114,8 @@ public class MainController {
             }
         }
 
-
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
-
-        return "person/main";
-    }
-
-    @GetMapping("/posts/{id}")
-    public String postDetailForm(@PathVariable int id, HttpServletRequest request) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-
-        // 목적: 로그인 하지 않아도 회사에서 올린 공고가 보임
-        Post post = mainService.getPostDetail(id);
         request.setAttribute("post", post);
         return "person/post-detail";
     }
