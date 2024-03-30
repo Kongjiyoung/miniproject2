@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -25,18 +26,16 @@ public class Apply { // 지원 테이블
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post; // 채용공고 아이디
 
-
-    private String isPass; // 불합격, 합격, 검토중
+    private String isPass= "검토중"; // 불합격, 합격, 검토중
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-
     public Apply(Integer id, Resume resume, Post post, String isPass, Timestamp createdAt) {
         this.id = id;
         this.resume = resume;
         this.post = post;
-        this.isPass = isPass;
+        this.isPass = isPass!= null ? isPass : "검토중";
         this.createdAt = createdAt;
     }
 }

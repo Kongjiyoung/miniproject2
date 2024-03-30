@@ -625,7 +625,7 @@ INSERT INTO skill_tb(skill, post_id, created_at)
 VALUES ('Node.js', 13, now());
 
 -- --지원
--- -- resume_id(1~13), post_id(1~13), company_id(14~22), person_id(1~13), 합격, 불합격, 심사중
+-- -- resume_id(1~13), post_id(1~13), company_id(14~22), person_id(1~13), 합격, 불합격, 검토중
 -- -- 14번 회사
 INSERT INTO apply_tb(resume_id, post_id, is_pass, created_at)
 VALUES (1, 1, '합격', now());
