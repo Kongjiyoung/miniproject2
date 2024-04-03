@@ -36,4 +36,5 @@ public class ApplyRequest {
         private Integer id;
         private String isPass;
     }
+
 }

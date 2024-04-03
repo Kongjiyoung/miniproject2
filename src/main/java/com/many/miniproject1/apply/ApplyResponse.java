@@ -2,6 +2,7 @@ package com.many.miniproject1.apply;
 
 
 
+import com.many.miniproject1.offer.Offer;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -154,5 +155,32 @@ public class ApplyResponse {
             private int resumeId;
         }
 
+    }
+
+    @Data
+    public static class PostApplyDTO {
+        private int resumeId;
+        private int postId; // 채용공고 아이디
+        private String isPass;
+
+        public PostApplyDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.postId = apply.getPost().getId();
+            this.isPass = apply.getIsPass();
+        }
+    }
+
+    @Data
+    public static class ChoiceDTO {
+        private int resumeId;
+        private int postId; // 채용공고 아이디
+        private String isPass;
+
+        public ChoiceDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.postId = apply.getPost().getId();
+            this.isPass = apply.getIsPass();
+
+        }
     }
 }
