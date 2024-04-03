@@ -15,7 +15,7 @@
                     {{^isMatchingCompany}}
                         <!-- 스크랩 -->
                         <div class="col-auto">
-                            <form action="/posts/{{id}}/scrap" method="post">
+                            <form action="/posts/{{post.id}}/scrap" method="post">
                                 <div class="d-flex justify-content-end">
                                     <button class="btn btn-outline-success" type="submit">스크랩하기</button>
                                 </div>
@@ -29,7 +29,7 @@
             {{#sessionuser}}
                 {{^isMatchingCompany}}
                     <!-- 이력서 선택/보내기 -->
-                    <form class="row d-flex justify-content-end g-3" action="/posts/{{id}}/apply" method="post">
+                    <form class="row d-flex justify-content-end g-3" action="/posts/{{post.id}}/apply" method="post">
                         <div class="col-auto">
                             <select class="form-select" aria-label="Default select example"
                                     id="resumeChoice" name="resumeChoice">
