@@ -5,7 +5,7 @@
         <div class="px-5 pt-5 pb-2">
         </div>
         <div class="px-5">
-            {{#offer}}{{#post}}
+            {{#offer}}
                 <input style="display: none" id="companyId">
                 <div class="d-flex justify-content-start align-items-center">
                     <h3 class="title">{{title}}</h3>
@@ -32,7 +32,7 @@
                             </tr>
                             <tr>
                                 <td>회사명</td>
-                                <td><a href="#" style=" color: black; font-weight: bold;">{{user.companyName}}</a></td>
+                                <td><a href="#" style=" color: black; font-weight: bold;">{{companyName}}</a></td>
                                 <!-- TODO: 가능하다면 이 회사의 진행 중인 채용 공고 모음을 만들어보자 -->
                             </tr>
                         </table>
@@ -59,9 +59,9 @@
                         <h4>필요 스킬</h4>
                         <div class="d-flex justify-content-start">
                             <div class="row row-cols-auto gap-3 justify-content-start my-3" style="width: 70%;">
-                                {{#skillList}}
+                                {{#skills}}
                                   <div class="btn btn-outline-primary mx-3 disabled">{{skill}}</div>
-                                {{/skillList}}
+                                {{/skills}}
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <!--                        style="width: 100%">수정하기-->
                     <!--                </a> -->
                 </div>
-            {{/post}}{{/offer}}
+            {{/offer}}
         </div>
     </div>
     <!-- list-group( 오른쪽 바로가기) 시작 -->

@@ -115,102 +115,102 @@ public class ScrapRepository {
             return responseList;
     }
 
-    public List<ScrapResponse.ScrapResumeDTO> findResumeList(int idx) {
-        String q = """
-                SELECT u.email, u.username, u.tel, u.address, u.birth, r.id, r.person_id, r.title, r.profile, r.portfolio, r.introduce, r.career, r.simple_introduce, r.created_at
-                FROM user_tb u
-                INNER JOIN resume_tb r ON u.id = r.person_id
-                INNER JOIN scrap_tb s ON r.id = s.resume_id
-                WHERE s.company_id = ?;
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, idx);
+//    public List<ScrapResponse.ScrapResumeDTO> findResumeList(int idx) {
+//        String q = """
+//                SELECT u.email, u.username, u.tel, u.address, u.birth, r.id, r.person_id, r.title, r.profile, r.portfolio, r.introduce, r.career, r.simple_introduce, r.created_at
+//                FROM user_tb u
+//                INNER JOIN resume_tb r ON u.id = r.person_id
+//                INNER JOIN scrap_tb s ON r.id = s.resume_id
+//                WHERE s.company_id = ?;
+//                """;
+//        Query query = em.createNativeQuery(q);
+//        query.setParameter(1, idx);
+//
+//        List<Object[]> rows = query.getResultList();
+//        List<ScrapResponse.ScrapResumeDTO> result = new ArrayList<>();
+//
+//        for (Object[] row : rows) {
+//            String username = (String) row[0];
+//            String birth = (String) row[1];
+//            String tel = (String) row[2];
+//            String address = (String) row[3];
+//            String email = (String) row[4];
+//            Integer id = (Integer) row[5];
+//            Integer personId = (Integer) row[6];
+//            String title = (String) row[7];
+//            String profile = (String) row[8];
+//            String portfolio = (String) row[9];
+//            String introduce = (String) row[10];
+//            String career = (String) row[11];
+//            String simpleIntroduce = (String) row[12];
+//            Timestamp createdAt = (Timestamp) row[13];
+//
+//            ScrapResponse.ScrapResumeDTO responseDTO = new ScrapResponse.ScrapResumeDTO();
+//            responseDTO.setUsername(username);
+//            responseDTO.setBirth(birth);
+//            responseDTO.setTel(tel);
+//            responseDTO.setAddress(address);
+//            responseDTO.setEmail(email);
+//            responseDTO.setId(id);
+//            responseDTO.setPersonId(personId);
+//            responseDTO.setTitle(title);
+//            responseDTO.setProfile(profile);
+//            responseDTO.setPortfolio(portfolio);
+//            responseDTO.setIntroduce(introduce);
+//            responseDTO.setCareer(career);
+//            responseDTO.setSimpleIntroduce(simpleIntroduce);
+//            responseDTO.setCreatedAt(createdAt);
+//
+//            result.add(responseDTO);
+//        }
+//        return result;
+//    }
 
-        List<Object[]> rows = query.getResultList();
-        List<ScrapResponse.ScrapResumeDTO> result = new ArrayList<>();
-
-        for (Object[] row : rows) {
-            String username = (String) row[0];
-            String birth = (String) row[1];
-            String tel = (String) row[2];
-            String address = (String) row[3];
-            String email = (String) row[4];
-            Integer id = (Integer) row[5];
-            Integer personId = (Integer) row[6];
-            String title = (String) row[7];
-            String profile = (String) row[8];
-            String portfolio = (String) row[9];
-            String introduce = (String) row[10];
-            String career = (String) row[11];
-            String simpleIntroduce = (String) row[12];
-            Timestamp createdAt = (Timestamp) row[13];
-
-            ScrapResponse.ScrapResumeDTO responseDTO = new ScrapResponse.ScrapResumeDTO();
-            responseDTO.setUsername(username);
-            responseDTO.setBirth(birth);
-            responseDTO.setTel(tel);
-            responseDTO.setAddress(address);
-            responseDTO.setEmail(email);
-            responseDTO.setId(id);
-            responseDTO.setPersonId(personId);
-            responseDTO.setTitle(title);
-            responseDTO.setProfile(profile);
-            responseDTO.setPortfolio(portfolio);
-            responseDTO.setIntroduce(introduce);
-            responseDTO.setCareer(career);
-            responseDTO.setSimpleIntroduce(simpleIntroduce);
-            responseDTO.setCreatedAt(createdAt);
-
-            result.add(responseDTO);
-        }
-        return result;
-    }
-
-    public ScrapResponse.ScrapResumeDTO findResume(int companyId, int resumeId) {
-        String q = """
-                SELECT u.email, u.username, u.tel, u.address, u.birth, r.id, r.person_id, r.title, r.profile, r.portfolio, r.introduce, r.career, r.simple_introduce, r.created_at
-                FROM user_tb u
-                INNER JOIN resume_tb r ON u.id = r.person_id
-                INNER JOIN scrap_tb a ON r.id = a.resume_id
-                WHERE a.company_id = ? AND a.resume_id=?;
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, companyId);
-        query.setParameter(2, resumeId);
-
-        Object[] row = (Object[]) query.getSingleResult();
-
-        String username = (String) row[0];
-        String birth = (String) row[1];
-        String tel = (String) row[2];
-        String address = (String) row[3];
-        String email = (String) row[4];
-        Integer id = (Integer) row[5];
-        Integer personId = (Integer) row[6];
-        String title = (String) row[7];
-        String profile = (String) row[8];
-        String portfolio = (String) row[9];
-        String introduce = (String) row[10];
-        String career = (String) row[11];
-        String simpleIntroduce = (String) row[12];
-        Timestamp createdAt = (Timestamp) row[13];
-
-        ScrapResponse.ScrapResumeDTO responseDTO = new ScrapResponse.ScrapResumeDTO();
-        responseDTO.setUsername(username);
-        responseDTO.setBirth(birth);
-        responseDTO.setTel(tel);
-        responseDTO.setAddress(address);
-        responseDTO.setEmail(email);
-        responseDTO.setId(id);
-        responseDTO.setPersonId(personId);
-        responseDTO.setTitle(title);
-        responseDTO.setProfile(profile);
-        responseDTO.setPortfolio(portfolio);
-        responseDTO.setIntroduce(introduce);
-        responseDTO.setCareer(career);
-        responseDTO.setSimpleIntroduce(simpleIntroduce);
-        responseDTO.setCreatedAt(createdAt);
-
-        return responseDTO;
-    }
+//    public ScrapResponse.ScrapResumeDTO findResume(int companyId, int resumeId) {
+//        String q = """
+//                SELECT u.email, u.username, u.tel, u.address, u.birth, r.id, r.person_id, r.title, r.profile, r.portfolio, r.introduce, r.career, r.simple_introduce, r.created_at
+//                FROM user_tb u
+//                INNER JOIN resume_tb r ON u.id = r.person_id
+//                INNER JOIN scrap_tb a ON r.id = a.resume_id
+//                WHERE a.company_id = ? AND a.resume_id=?;
+//                """;
+//        Query query = em.createNativeQuery(q);
+//        query.setParameter(1, companyId);
+//        query.setParameter(2, resumeId);
+//
+//        Object[] row = (Object[]) query.getSingleResult();
+//
+//        String username = (String) row[0];
+//        String birth = (String) row[1];
+//        String tel = (String) row[2];
+//        String address = (String) row[3];
+//        String email = (String) row[4];
+//        Integer id = (Integer) row[5];
+//        Integer personId = (Integer) row[6];
+//        String title = (String) row[7];
+//        String profile = (String) row[8];
+//        String portfolio = (String) row[9];
+//        String introduce = (String) row[10];
+//        String career = (String) row[11];
+//        String simpleIntroduce = (String) row[12];
+//        Timestamp createdAt = (Timestamp) row[13];
+//
+//        ScrapResponse.ScrapResumeDTO responseDTO = new ScrapResponse.ScrapResumeDTO();
+//        responseDTO.setUsername(username);
+//        responseDTO.setBirth(birth);
+//        responseDTO.setTel(tel);
+//        responseDTO.setAddress(address);
+//        responseDTO.setEmail(email);
+//        responseDTO.setId(id);
+//        responseDTO.setPersonId(personId);
+//        responseDTO.setTitle(title);
+//        responseDTO.setProfile(profile);
+//        responseDTO.setPortfolio(portfolio);
+//        responseDTO.setIntroduce(introduce);
+//        responseDTO.setCareer(career);
+//        responseDTO.setSimpleIntroduce(simpleIntroduce);
+//        responseDTO.setCreatedAt(createdAt);
+//
+//        return responseDTO;
+//    }
 }

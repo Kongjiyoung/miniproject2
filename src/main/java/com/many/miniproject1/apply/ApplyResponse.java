@@ -6,6 +6,7 @@ import com.many.miniproject1.resume.Resume;
 import com.many.miniproject1.skill.Skill;
 import com.many.miniproject1.user.User;
 import lombok.Builder;
+import com.many.miniproject1.offer.Offer;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -345,7 +346,32 @@ public class ApplyResponse {
                 this.skill = skill.getSkill();
             }
         }
+    }
 
+    @Data
+    public static class PostApplyDTO {
+        private int resumeId;
+        private int postId; // 채용공고 아이디
+        private String isPass;
 
+        public PostApplyDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.postId = apply.getPost().getId();
+            this.isPass = apply.getIsPass();
+        }
+    }
+
+    @Data
+    public static class ChoiceDTO {
+        private int resumeId;
+        private int postId; // 채용공고 아이디
+        private String isPass;
+
+        public ChoiceDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.postId = apply.getPost().getId();
+            this.isPass = apply.getIsPass();
+
+        }
     }
 }

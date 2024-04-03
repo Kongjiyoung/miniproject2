@@ -18,39 +18,35 @@ public class OfferController {
     private final HttpSession session;
     private final OfferService offerService;
 
-    // 제안한 이력서 상세보기
-    @GetMapping("/person/offer/post/detail/{id}")
-    public String personOfferDetail(HttpServletRequest request, @PathVariable int id) {
-        Offer offer = offerService.offerDetail(id);
-        request.setAttribute("offer", offer);
-        return "person/offer-post-detail";
-    }
-
-    // person의 offers 관리
+    // 개인 제안 목록
     @GetMapping("/person/offers")
     public String personOffers(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Offer> offerList = offerService.personOffers(sessionUser.getId());
-        request.setAttribute("offerList", offerList);
+        List<OfferResponse.personOffersDTO> respDTO = offerService.personOffers(sessionUser.getId());
+        request.setAttribute("offerList", respDTO);
         return "person/offers";
     }
+    // 개인 제안 상세보기
+    @GetMapping("/person/offer/post/detail/{id}")
+    public String personOfferDetail(HttpServletRequest request, @PathVariable int id) {
+        OfferResponse.personOfferDetailDTO respDTO = offerService.personOfferDetail(id);
+        request.setAttribute("offer", respDTO);
+        return "person/offer-post-detail";
+    }
 
-
-    // company의 offers 관리
-    // skill 만 불러오면 되나.?
+    // 기업 제안 목록
     @GetMapping("/company/offers")
     public String personPost(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Offer> offerList = offerService.personPost(sessionUser.getId());
-        System.out.println(offerList);
-        request.setAttribute("offerList", offerList);
+        List<OfferResponse.companyOffersDTO> respDTO = offerService.companyOffers(sessionUser.getId());
+        request.setAttribute("offerList", respDTO);
         return "company/offers";
     }
 
     @GetMapping("/company/offer/{id}/detail")
     public String companyOfferDetail(HttpServletRequest request, @PathVariable int id) {
-        Offer offer = offerService.companyOfferDetail(id);
-        request.setAttribute("offer", offer);
+        OfferResponse.companyOfferDetailDTO respDTO = offerService.companyOfferDetail(id);
+        request.setAttribute("offer", respDTO);
         return "company/mypage-resume-detail";
     }
 
