@@ -1,5 +1,6 @@
 package com.many.miniproject1.resume;
 
+import com.many.miniproject1.post.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
@@ -49,4 +50,12 @@ public interface ResumeJPARepository extends JpaRepository<Resume, Integer> {
             where u.id=:user_id
             """)
     List<Resume> findBySessionUserId(@Param("user_id") Integer userId);
+
+    @Query("""
+            SELECT r
+            FROM Resume r
+            JOIN FETCH r.user u
+            WHERE u.id = :user_id
+            """)
+    List<Resume> findByResumeId(@Param("user_id") int userId);
 }

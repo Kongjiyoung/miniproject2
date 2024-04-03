@@ -1,6 +1,8 @@
 package com.many.miniproject1.scrap;
 
 import com.many.miniproject1.apply.Apply;
+import com.many.miniproject1.apply.ApplyResponse;
+import com.many.miniproject1.offer.OfferResponse;
 import com.many.miniproject1.post.Post;
 import com.many.miniproject1.offer.Offer;
 import com.many.miniproject1.resume.Resume;
@@ -25,25 +27,19 @@ public class ScrapController {
 
     //개인 채용 공고 스크랩
     @GetMapping("/person/scrap")
-    public String personScrapForm(HttpServletRequest request) {
+    public String personScrap(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Scrap> scrapList = scrapService.personScrapForm(sessionUser.getId());
+        List<ScrapResponse.ScrapPostListDTO> scrapList = scrapService.personScrapList(sessionUser.getId());
         request.setAttribute("scrapList", scrapList);
-        System.out.println(scrapList);
-
         return "person/scrap";
     }
 
     @GetMapping("/person/scrap/{id}/detail")
     public String personScrapDetailForm(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        //뷰내용 뿌리기
-        Scrap scrap = scrapService.getScrapPostDetail(id);
-        System.out.println("스큷: " + scrap);
+        ScrapResponse.ScrapPostDetailDTO scrap = scrapService.scrapPostDetail(id);
         //이력서 선택
-        List<Resume> resumeList = resumeService.getResumeFindBySessionUserId(sessionUser.getId());
-        System.out.println("이력서: "+resumeList);
+        List<Resume> resumeList = scrapService.personResumeList(sessionUser.getId());
         request.setAttribute("scrap", scrap);
         request.setAttribute("resumeList", resumeList);
 
@@ -52,14 +48,13 @@ public class ScrapController {
 
     @PostMapping("/person/scrap/{id}/detail/delete")
     public String personScrapDelete(@PathVariable Integer id) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
         scrapService.deleteScrapPost(id);
         return "redirect:/person/scrap";
     }
 
     @PostMapping("/person/scrap/{id}/detail/apply")
     public String personPostApply(@PathVariable Integer id, Integer resumeChoice) { // 스크랩 아이디와 이력서 아이디를 받아서
-        scrapService.saveApply(id, resumeChoice);
+        scrapService.sendResumeToPost(id, resumeChoice);
         return "redirect:/person/scrap/"+id+"/detail";
     }
 
@@ -67,7 +62,7 @@ public class ScrapController {
     @GetMapping("/company/scrap")
     public String companyScrapForm(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Scrap> scrapList = scrapService.companyScrapList(sessionUser.getId());
+        List<ScrapResponse.ScrapResumeListDTO> scrapList = scrapService.companyScrapList(sessionUser.getId());
         request.setAttribute("scrapList", scrapList);
         return "company/scrap";
     }
@@ -75,7 +70,7 @@ public class ScrapController {
     @GetMapping("/company/scrap/{id}/detail")
     public String companyScrapDetailForm(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Scrap scrap = scrapService.getResumeDetail(sessionUser.getId(), id);
+        ScrapResponse.ScrapResumeDetailDTO scrap = scrapService.getResumeDetail(id);
         List<Post> postList = scrapService.companyPostList(sessionUser.getId());
         request.setAttribute("postList", postList);
         request.setAttribute("scrap", scrap);
@@ -90,7 +85,7 @@ public class ScrapController {
 
     @PostMapping("/company/scrap/{id}/detail/offer")
     public String companyResumeOffer(@PathVariable Integer id, Integer postChoice) {
-        Offer offer = scrapService.sendPostToResume(id, postChoice);
+        scrapService.sendPostToResume(id, postChoice);
         return "redirect:/company/scrap/"+id+"/detail";
     }
 

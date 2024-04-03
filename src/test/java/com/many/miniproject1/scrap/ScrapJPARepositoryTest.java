@@ -50,16 +50,16 @@ public class ScrapJPARepositoryTest {
         // then
     }
 
-    @Test
-    public void resumeDetail_test() {
-        // given
-        int userId = 14;
-        int resumeId = 1;
-        // when
-        Optional<Scrap> scrap = scrapJPARepository.findByResumeIdAndSkillAndUser(userId,resumeId);
-        System.out.println("test::: " + scrap);
-        // then
-    }
+//    @Test
+//    public void resumeDetail_test() {
+//        // given
+//        int userId = 14;
+//        int resumeId = 1;
+//        // when
+//        Optional<Scrap> scrap = scrapJPARepository.findByResumeIdAndSkillAndUser(userId,resumeId);
+//        System.out.println("test::: " + scrap);
+//        // then
+//    }
 
     @Test
     public void sendPostToResume_test(){
@@ -93,4 +93,14 @@ public class ScrapJPARepositoryTest {
         assertThat(scrap.getPost().getTitle()).isEqualTo("데이터 분석가");
         assertThat(scrap.getPost().getSkillList().size()).isEqualTo(3);
     }
+
+    @Test
+        public void scrapResumeList_test(){
+            // given
+        int id = 1;
+            // when
+        List<Scrap> scrapList = scrapJPARepository.findByCompanyIdJoinSkills(id);
+        System.out.println("test::" +scrapList);
+            // then
+        }
 }
