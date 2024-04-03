@@ -315,9 +315,9 @@ public class ApplyResponse {
         private String task;
         private String profile;
         private String workingArea;
-        private List<SkillDTO> skllList;
+        private List<SkillDTO> skillList;
 
-        public ApplyPostSkillDetailDTO(Apply apply, User user, Post post, List<Skill> skllList) {
+        public ApplyPostSkillDetailDTO(Apply apply, User user, Post post, List<Skill> skillList) {
             this.id = apply.getId();
             this.companyName = user.getCompanyName();
             this.title = post.getTitle();
@@ -330,7 +330,7 @@ public class ApplyResponse {
             this.task = post.getTask();
             this.profile = user.getProfile();
             this.workingArea = post.getWorkingArea();
-            this.skllList = skllList.stream().map(skill -> {
+            this.skillList = skillList.stream().map(skill -> {
                 return new SkillDTO(skill);
             }).collect(Collectors.toList());
         }
