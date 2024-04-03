@@ -184,26 +184,26 @@ public class MainService {
         return new MainResponse.MainResumeDetailDTO(resume, resume.getUser(), resume.getSkillList());
     }
 
-    public List<MainResponse.PostTitleListDTO> getPostTitleListDTOs(Integer sessionUserId, Integer companyId) {
-        System.out.println(1);
-        List<Post> postList = postJPARepository.findPostListByCompanyId(sessionUserId, companyId);
-        List<MainResponse.PostTitleListDTO> postTitleListDTOList = new ArrayList<>();
-
-        postList.stream().map(post -> {
-            return postTitleListDTOList.add(MainResponse.PostTitleListDTO.builder()
-                    .id(post.getId())
-                    .title(post.getTitle())
-                    .build());
-        }).collect(Collectors.toList());
-
-        return postTitleListDTOList;
-    }
+//    public List<MainResponse.PostTitleListDTO> getPostTitleListDTOs(Integer sessionUserId, Integer companyId) {
+//        System.out.println(1);
+//        List<Post> postList = postJPARepository.findPostListByCompanyId(sessionUserId, companyId);
+//        List<MainResponse.PostTitleListDTO> postTitleListDTOList = new ArrayList<>();
+//
+//        postList.stream().map(post -> {
+//            return postTitleListDTOList.add(MainResponse.PostTitleListDTO.builder()
+//                    .id(post.getId())
+//                    .title(post.getTitle())
+//                    .build());
+//        }).collect(Collectors.toList());
+//
+//        return postTitleListDTOList;
+//    }
 
     public List<Post> getPostsByCompanyId(Integer companyId) {
         return postJPARepository.findByUserIdJoinSkillAndUser(companyId);
     }
 
-    public MainResponse.PostDetailDTO getPostDetail(int postId) {
+    public MainResponse.PostDetailDTO getPostDetail(Integer postId) {
         Post post = postJPARepository.findByPostIdJoinUserAndSkill(postId);
         return new MainResponse.PostDetailDTO(post, post.getUser(), post.getSkillList());
     }

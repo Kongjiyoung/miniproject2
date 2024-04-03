@@ -124,8 +124,9 @@ public class MainResponse {
     }
     @Data
     public static class PostDetailDTO {
-        private int id;
+        private Integer id;
         private String career;
+        private String title;
         private String pay;
         private String deadline;
         private String companyName;
@@ -148,6 +149,7 @@ public class MainResponse {
         @Builder
         public PostDetailDTO(Post post, User user, List<Skill> skllList) {
             this.id = post.getId();
+            this.title = post.getTitle();
             this.profile = post.getProfile();
             this.career = post.getCareer();
             this.pay = post.getPay();
@@ -171,7 +173,7 @@ public class MainResponse {
 
         @Data
         public class SkillDTO {
-            private int id;
+            private Integer id;
             private String skill;
 
             public SkillDTO(Skill skill) {

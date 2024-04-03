@@ -133,15 +133,15 @@ public class MainController {
     }
 
     @GetMapping("/posts/{id}")
-    public String postDetailForm(@PathVariable int id, HttpServletRequest request) {
+    public String postDetailForm(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         //기업인지 개인인지 구분
-        boolean isPerson = false;
+        boolean isCompany = false;
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            if (role.equals("person")) {
-                isPerson = true;
+            if (role.equals("company")) {
+                isCompany = true;
             }
             Integer personId = sessionUser.getId();
             List<MainResponse.ApplyListDTO> resumeList = mainService.getResumeId(sessionUser.getId());
@@ -149,10 +149,9 @@ public class MainController {
         }
 
         MainResponse.PostDetailDTO post = mainService.getPostDetail(id);
-        MainResponse.MainResumeDetailDTO resume = mainService.getResumeDetail(id);
         Map<String, Object> responseBody = new HashMap<>();
         request.setAttribute("post", post);
-        request.setAttribute("isMatchingCompany", isPerson);
+        request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
         return "person/post-detail";
     }
