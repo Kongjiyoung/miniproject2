@@ -20,7 +20,7 @@ public class User {
     private Integer id;
     private String role;
     @Column(unique = true)
-    private String username; //이제부터 아이디를 이메일로 안받을 예정
+    private String username; //이제부/터 아이디를 이메일로 안받을 예정
     private String email;
     private String password;
     private String name;

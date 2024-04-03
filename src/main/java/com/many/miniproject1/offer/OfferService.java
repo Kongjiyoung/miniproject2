@@ -17,27 +17,29 @@ import java.util.List;
 public class OfferService {
     private final OfferJPARepository offerJPARepository;
 
-    public List<Offer> personPost(Integer userId) {
-        offerJPARepository.findByUserId(userId);
-        System.out.println(offerJPARepository.findByUserId(userId));
-        return offerJPARepository.findByUserId(userId);
+    // 개인 제안 목록
+    public List<OfferResponse.personOffersDTO> personOffers(Integer postId) {
+        List<Offer> offerList = offerJPARepository.findByPostIdJoinPost(postId);
+        return offerList.stream().map(offer -> new OfferResponse.personOffersDTO(offer)).toList();
     }
-
+    // 개인 제안 상세 (post)
+    public OfferResponse.personOfferDetailDTO personOfferDetail(Integer id) {
+        Offer offer = offerJPARepository.findByPostId(id);
+        return new OfferResponse.personOfferDetailDTO(offer);
+    }
+    // 기업 제안 목록
+    public List<OfferResponse.companyOffersDTO> companyOffers(Integer userId) {
+        List<Offer> offerList = offerJPARepository.findByUserId(userId);
+        return offerList.stream().map(offer -> new OfferResponse.companyOffersDTO(offer)).toList();
+    }
+    // 기업 제안 상세 (resume)
+    public OfferResponse.companyOfferDetailDTO companyOfferDetail(int id) {
+        Offer offer = offerJPARepository.findByIdJoinResumeAndSkillAndUser(id);
+        return new OfferResponse.companyOfferDetailDTO(offer);
+    }
+    // 기업 제안 취소
     @Transactional
     public void deleteOffer(int id) {
         offerJPARepository.deleteById(id);
-    }
-
-    public Offer offerDetail(Integer id) {
-        return offerJPARepository.findByPostId(id);
-    }
-
-
-    public List<Offer> personOffers(Integer postId) {
-        return offerJPARepository.findByPostIdJoinPost(postId);
-    }
-    public Offer companyOfferDetail(int id) {
-        Offer offer = offerJPARepository.findByIdJoinResumeAndSkillAndUser(id);
-        return offer;
     }
 }
