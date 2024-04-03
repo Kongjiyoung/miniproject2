@@ -1,21 +1,27 @@
 package com.many.miniproject1.main;
 
+import com.many.miniproject1.apply.ApplyResponse;
 import com.many.miniproject1.offer.Offer;
+import com.many.miniproject1.offer.OfferRequest;
 import com.many.miniproject1.post.Post;
 import com.many.miniproject1.resume.Resume;
 import com.many.miniproject1.apply.Apply;
 import com.many.miniproject1.scrap.Scrap;
+import com.many.miniproject1.scrap.ScrapResponse;
 import com.many.miniproject1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -77,10 +83,9 @@ public class MainController {
             request.setAttribute("postList", postList);
         }
 
-        Resume resume = mainService.resumeDetailForm(id);
+        MainResponse.MainResumeDetailDTO resume = mainService.getResumeDetail(id);
+        Map<String, Object> responseBody = new HashMap<>();
         request.setAttribute("resume", resume);
-
-
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
 
@@ -88,15 +93,15 @@ public class MainController {
     }
 
     @PostMapping("/resumes/{id}/offer")
-    public String companyResumeOffer(@PathVariable int id,int postChoice) {
-        Offer offer = mainService.sendPostToResume(id, postChoice);
+    public String companyResumeOffer(@PathVariable Integer id, MainRequest.PostChoiceDTO postChoice) {
+        mainService.sendPostToResume(id, postChoice.getPostChoice());
         return "redirect:/resumes/" + id;
     }
 
     @PostMapping("/resumes/{id}/scrap")
-    public String companyResumeScrap(@PathVariable int id) {
+    public String companyResumeScrap(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Scrap scrap = mainService.companyScrap(id, sessionUser.getId());
+        mainService.resumeScrap(id, sessionUser.getId());
         return "redirect:/resumes/" + id;
     }
     // YSH
@@ -105,9 +110,6 @@ public class MainController {
     //메인 채용 공고
     @GetMapping({"/person/main", "/"})
     public String postForm(HttpServletRequest request) {
-        List<Post> postList = mainService.getPostList();
-
-        request.setAttribute("postList", postList);
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -123,6 +125,8 @@ public class MainController {
         }
 
 
+        List<Post> postList = mainService.postForm();
+        request.setAttribute("postList", postList);
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
 
@@ -130,26 +134,23 @@ public class MainController {
     }
 
     @GetMapping("/posts/{id}")
-    public String postDetailForm(@PathVariable int id, HttpServletRequest request) {
+    public String postDetailForm(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        if (sessionUser != null) {
-            List<Resume> resumeList = mainService.getResumeId(sessionUser.getId());
-            request.setAttribute("resumeList", resumeList);
-        }
-
         //기업인지 개인인지 구분
-        Boolean isCompany = false;
+        boolean isCompany = false;
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            System.out.println(role);
-
             if (role.equals("company")) {
                 isCompany = true;
             }
+            Integer companyId = sessionUser.getId();
+            List<Resume> resumeList = mainService.findByUserIdResume(companyId);
+            request.setAttribute("resumeList", resumeList);
         }
-        // 목적: 로그인 하지 않아도 회사에서 올린 공고가 보임
-        Post post = mainService.getPostDetail(id);
+
+        MainResponse.PostDetailDTO post = mainService.getPostDetail(id);
+        Map<String, Object> responseBody = new HashMap<>();
         request.setAttribute("post", post);
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
@@ -158,11 +159,9 @@ public class MainController {
 
     // 지원하기 버튼 안 보임
     @PostMapping("/posts/{id}/apply")
-    public String personPostApply(@PathVariable int id, Integer resumeChoice) {
+    public String personPostApply(@PathVariable int id, MainRequest.ResumeChoiceDTO resumeChoice) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        //Integer personId = sessionUser.getId();
-//        Apply apply = mainService.personPostApply(id, resumeChoice);
-        mainService.personPostApply(id, resumeChoice);
+        mainService.personPostApply(id, resumeChoice.getResumeChoice());
         return "redirect:/posts/" + id;
     }
 
@@ -171,7 +170,7 @@ public class MainController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 로그인을 하지 않으면 세션유저가 없어서 주석을 걸어놓음
 //        Integer personId = sessionUser.getId();
-        Scrap scrap = mainService.personPostScrap(sessionUser.getId(), id);
+        ScrapResponse.PostScrapSaveDTO respDTO = mainService.personPostScrap(sessionUser.getId(), id);
         return "redirect:/posts/" + id;
     }
 

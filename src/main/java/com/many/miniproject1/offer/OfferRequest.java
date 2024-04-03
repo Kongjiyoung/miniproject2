@@ -39,4 +39,25 @@ public class OfferRequest {
                     .build();
         }
     }
+
+    @Data
+    public static class MainOfferSaveDTO {
+        private Integer resumeId;
+        private Integer postId;
+
+        public MainOfferSaveDTO() {
+        }
+
+        public MainOfferSaveDTO(Offer offer) {
+            this.resumeId = offer.getResume().getId();
+            this.postId = offer.getPost().getId();
+        }
+
+        public static Offer toEntity(Resume resume, Post post) {
+            return Offer.builder()
+                    .post(post)
+                    .resume(resume)
+                    .build();
+        }
+    }
 }

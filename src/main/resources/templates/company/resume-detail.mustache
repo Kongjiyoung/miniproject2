@@ -4,6 +4,7 @@
     <div class="border hs_content_box w-100 mx-2 mt-4 rounded shadow pb-5">
         <div class="px-5 pt-5 pb-2"></div>
         <div class="px-5">
+
             <div class="row align-items-center">
                 <!-- 타이틀 -->
                 <div class="col">
@@ -46,61 +47,65 @@
                     </form>
                 {{/isMatchingCompany}}
             {{/sessionuser}}
-            <div class="pt-5 mt-3">
-                <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
-                    <div><!-- 이미지를 올리면 그게 올라가고 올리지 않으면 기본 프로필이 올라감 -->
-                        <img src="/images/{{resume.user.profile}}" alt="프로필 사진" style="width: 188px; height: 226px;">
+            {{#resume}}
+                <div class="pt-5 mt-3">
+                    <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
+                        <div><!-- 이미지를 올리면 그게 올라가고 올리지 않으면 기본 프로필이 올라감 -->
+                            <img src="/images/{{profile}}" alt="프로필 사진" style="width: 188px; height: 226px;">
 
+                        </div>
+                        <table class="mx-4 resume_table">
+                            <tr>
+                                <td style="width: 120px">이름</td>
+                                <td>{{name}}</td>
+                            </tr>
+                            <tr>
+                                <td>생년월일</td>
+                                <td>{{birth}}</td>
+                            </tr>
+                            <tr>
+                                <td>연락처</td>
+                                <td>{{tel}}</td>
+                            </tr>
+                            <tr>
+                                <td>주소</td>
+                                <td>{{address}}</td>
+                            </tr>
+                            <tr>
+                                <td>이메일</td>
+                                <td>{{email}}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <table class="mx-4 resume_table">
-                        <tr>
-                            <td style="width: 120px">이름</td>
-                            <td>{{resume.user.name}}</td>
-                        </tr>
-                        <tr>
-                            <td>생년월일</td>
-                            <td>{{resume.user.birth}}</td>
-                        </tr>
-                        <tr>
-                            <td>연락처</td>
-                            <td>{{resume.user.tel}}</td>
-                        </tr>
-                        <tr>
-                            <td>주소</td>
-                            <td>{{resume.user.address}}</td>
-                        </tr>
-                        <tr>
-                            <td>이메일</td>
-                            <td>{{resume.user.email}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="mt-5">
-                    <h4>커리어</h4>
-                    <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 mb-5 opacity-80" rows="10"
-                              readOnly>{{resume.career}}</textarea>
-                    <h4>간단 소개</h4>
-                    <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 mb-5 opacity-80" rows="10"
-                              readOnly>{{resume.simpleIntroduce}}</textarea>
-                    <h4>포트폴리오 주소</h4>
-                    <input type="url" class="form-control mt-2" id="" style="display: block;"
-                           value="{{resume.portfolio}}" readOnly>
-                </div>
-                <div class="mt-5 jh_resume_skill">
-                    <h4>기술스택</h4>
-                    <div>
-                        {{#resume.skillList}}
-                            <button class="btn btn-outline-warning btn-sm disabled col-1">{{skill}}</button>
-                        {{/resume.skillList}}
+                    <div class="mt-5">
+                        <h4>커리어</h4>
+                        <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 mb-5 opacity-80" rows="10"
+                                  readOnly>{{career}}</textarea>
+                        <h4>간단 소개</h4>
+                        <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 mb-5 opacity-80" rows="10"
+                                  readOnly>{{simpleIntroduce}}</textarea>
+                        <h4>포트폴리오 주소</h4>
+                        <input type="url" class="form-control mt-2" id="" style="display: block;"
+                               value="{{portfolio}}" readOnly>
+                    </div>
+                    <div class="mt-5 jh_resume_skill">
+                        <h4>기술스택</h4>
+                        <div>
+                            {{#skillList}}
+                                <button class="btn btn-outline-warning btn-sm disabled col-1">{{skill}}</button>
+                            {{/skillList}}
+                        </div>
+                    </div>
+                    <div class="mt-5 w-100">
+                        <h4>자기소개</h4>
+                        <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 opacity-80" rows="10"
+                                  readOnly>{{introduce}}
+                        </textarea>
                     </div>
                 </div>
-                <div class="mt-5 w-100">
-                    <h4>자기소개</h4>
-                    <textarea style="max-height: 150px; overflow-y: auto;" class="w-100 opacity-80" rows="10"
-                              readOnly>{{resume.introduce}}
-                    </textarea>
-                </div>
-            </div>
+            {{/resume}}
+
+
         </div>
     </div>
 </div>

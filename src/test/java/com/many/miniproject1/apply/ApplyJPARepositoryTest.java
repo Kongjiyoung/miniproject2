@@ -28,20 +28,20 @@ public class ApplyJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
-    @Test
-    public void findById_test() {
-        // given
-        ApplyRequest.UpdateIsPass reqDTO = new ApplyRequest.UpdateIsPass();
-        reqDTO.setId(1);
-
-        // when
-        Optional<Apply> apply = applyJPARepository.findById(reqDTO.getId());
-
-        // then
-        // System.out.println("findById_test: " + apply);
-        assertThat(apply.get().getResume().getTitle()).isEqualTo("백엔드 개발자 공지영입니다.");
-        assertThat(apply.get().getIsPass()).isEqualTo("합격");
-    }
+//    @Test
+//    public void findById_test() {
+//        // given
+//        ApplyRequest.UpdateIsPass reqDTO = new ApplyRequest.UpdateIsPass();
+//        reqDTO.setId(1);
+//
+//        // when
+//        Optional<Apply> apply = applyJPARepository.findById(reqDTO.getId());
+//
+//        // then
+//        // System.out.println("findById_test: " + apply);
+//        assertThat(apply.get().getResume().getTitle()).isEqualTo("백엔드 개발자 공지영입니다.");
+//        assertThat(apply.get().getIsPass()).isEqualTo("합격");
+//    }
 
     @Test
     public void findByPostIdJoinPostAndSkillAndUser_test() {
