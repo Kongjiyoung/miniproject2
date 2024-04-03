@@ -39,4 +39,8 @@ public class Apply { // 지원 테이블
         this.isPass = isPass;
         this.createdAt = createdAt;
     }
+
+    public void updateIsPass(ApplyRequest.UpdateIsPassDTO reqDTO) {
+        this.isPass = reqDTO.getIsPass();
+    }
 }

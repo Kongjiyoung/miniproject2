@@ -12,7 +12,7 @@
             <li class="card col" style="width: 15rem; padding: 0px !important; border: 0">
                 <a href="/company/resumes/{{id}}" style="text-decoration: none; color: black">
                     <div style="width: 100%; height: 15rem; overflow: hidden">
-                        <img src="/images/{{resume.profile}}" class="card-img-top" alt="이력서 사진"/>
+                        <img src="/images/{{profile}}" class="card-img-top" alt="이력서 사진"/>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" style="
@@ -23,17 +23,8 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
 
-                          "><b>{{resume.user.name}}</b></h5>
-                        <h5 class="card-title" style="
-
-                            display: -webkit-box;
-                            -webkit-line-clamp: 1;
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-
-                          "><b>{{resume.title}}</b></h5>
-                        <h6><span>커리어</span>|<span>{{resume.career}}</span></h6>
+                          "><b>{{title}}</b></h5>
+                        <h6><span>커리어</span>|<span>{{career}}</span></h6>
                         <p class="card-text" style="
 
                           display: -webkit-box;
@@ -42,7 +33,7 @@
                           overflow: hidden;
                           text-overflow: ellipsis;
                         ">
-                            {{resume.simpleIntroduce}}
+                            {{simpleIntroduce}}
                         </p>
                         <!-- 버튼 구림 -->
                         <div class="d-flex justify-content-start" style="
@@ -53,10 +44,10 @@
                           overflow: hidden;
                           text-overflow: ellipsis;
                         ">
-                            <h6><span>{{#resume.skillList}}
+                            <h6><span>{{#skllList}}
                                         <button class="btn btn-outline-warning btn-sm disabled">
                                             {{skill}}
-                                        </button>{{/resume.skillList}}</span></h6>
+                                        </button>{{/skllList}}</span></h6>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

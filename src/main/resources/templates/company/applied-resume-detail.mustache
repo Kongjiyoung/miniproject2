@@ -5,7 +5,7 @@
             <input style="display: none" id="companyId">
             <div class="d-flex justify-content-start align-items-center">
                 <div class="col">
-                    <h3 style="font-weight: bold">{{apply.resume.title}}</h3>
+                    <h3 style="font-weight: bold">{{apply.title}}</h3>
                 </div>
                 <div class="d-flex justify-content-end">
                     <!-- 이 버튼 합격 불합격 여부를 나타내기 위한 것인 듯 -->
@@ -38,26 +38,26 @@
                 <div style="width: 85%;">
                     <div class="jh_resume_flexbox mt-3">
                         <!-- 이미지를 올리면 그게 올라가고 올리지 않으면 기본 프로필이 올라감 -->
-                        <img src="/images/{{apply.resume.profile}}" alt="프로필 사진" style="width: 188px; height: 226px;">
+                        <img src="/images/{{apply.profile}}" alt="프로필 사진" style="width: 188px; height: 226px;">
                         <table class="resume_table">
                             <tr>
-                                <td>이름: {{apply.resume.user.name}}</td>
+                                <td>이름: {{apply.name}}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>생년월일: {{apply.resume.user.birth}}</td>
+                                <td>생년월일: {{apply.birth}}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>전화번호: {{apply.resume.user.tel}}</td>
+                                <td>전화번호: {{apply.tel}}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>거주지: {{apply.resume.user.address}}</td>
+                                <td>거주지: {{apply.address}}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>이메일: {{apply.resume.user.email}}</td>
+                                <td>이메일: {{apply.email}}</td>
                                 <td></td>
                             </tr>
                         </table>
@@ -65,28 +65,28 @@
                     <div class="mt-5">
                         <h4>커리어</h4>
                         <textarea name="" class="w-100 opacity-50" rows="10" readOnly>
-                            {{apply.resume.career}}
+                            {{apply.career}}
                         </textarea>
                         <h4>간단 소개</h4>
                         <textarea name="" class="w-100 opacity-50" rows="10" readOnly>
-                            {{apply.resume.simpleIntroduce}}
+                            {{apply.simpleIntroduce}}
                         </textarea>
                         <h4>포트폴리오 주소</h4>
                         <input type="url" class="form-control mt-2" id="" style="display: block;"
-                               value="{{apply.resume.portfolio}}" readOnly>
+                               value="{{apply.portfolio}}" readOnly>
                     </div>
                     <div class="mt-5 jh_resume_skill">
                         <h4>기술스택</h4>
                         <div class="row row-cols-auto gap-3 justify-content-start my-3" style="width: 70%;">
-                            {{#apply.resume.skillList}}
+                            {{#apply.skillList}}
                                 <div class="btn btn-outline-primary mx-3 disabled">{{skill}}</div>
-                            {{/apply.resume.skillList}}
+                            {{/apply.skillList}}
                         </div>
                     </div>
                     <div class="mt-5 w-100">
                         <h4>자기소개</h4>
                         <textarea name="" class="w-100 opacity-50" rows="10" readOnly>
-                            {{apply.resume.introduce}}
+                            {{apply.introduce}}
                         </textarea>
                     </div>
                 </div>

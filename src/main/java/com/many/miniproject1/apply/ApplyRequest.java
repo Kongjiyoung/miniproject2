@@ -32,7 +32,7 @@ public class ApplyRequest {
     }
 
     @Data
-    public static class UpdateIsPass {
+    public static class UpdateIsPassDTO {
         private Integer id;
         private String isPass;
     }
