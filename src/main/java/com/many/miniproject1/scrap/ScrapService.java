@@ -70,8 +70,9 @@ public class ScrapService {
     }
 
     @Transactional
-    public OfferResponse.ChoiceDTO sendPostToResume(Integer resumeId, Integer postChoice) {
-        Resume resume = resumeJPARepository.findById(resumeId)
+    public OfferResponse.ChoiceDTO sendPostToResume(Integer scrapId, Integer postChoice) {
+        Scrap scrap = scrapJPARepository.findById(scrapId).orElseThrow();
+        Resume resume = resumeJPARepository.findById(scrap.getResume().getId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
         Post post = postJPARepository.findById(postChoice)
                 .orElseThrow(() -> new Exception401("존재하지 않는 공고입니다!" + postChoice));
@@ -82,10 +83,12 @@ public class ScrapService {
     }
 
     @Transactional
-    public ApplyResponse.ChoiceDTO sendResumeToPost(Integer postId, Integer resumeChoice) {
+    public ApplyResponse.ChoiceDTO sendResumeToPost(Integer scrapId, Integer resumeChoice) {
         Resume resume = resumeJPARepository.findById(resumeChoice)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
-        Post post = postJPARepository.findById(postId)
+        Scrap scrap = scrapJPARepository.findById(scrapId)
+                .orElseThrow(()->new Exception401("존재하지 않는 공고입니다."));
+        Post post = postJPARepository.findById(scrap.getPost().getId())
                 .orElseThrow(() -> new Exception401("존재하지 않는 공고입니다!" + resumeChoice));
         ApplyRequest.SaveDTO scrapApplyDTO = new ApplyRequest.SaveDTO(resume,post);
         Apply apply = applyJPARepository.save(scrapApplyDTO.toEntity());

@@ -1,6 +1,8 @@
 {{> layout/header}}
 <div class="container d-flex">
     <div class=" mx-2 pb-4 w-100">
+        <div class="px-5 pt-5 pb-2">
+        </div>
         {{#scrap}}
             <div class="border border-tertiary p-5 rounded shadow">
                 <div class="px-5">
@@ -18,16 +20,14 @@
                     </div>
                     <hr class="d-inline-flex w-100">
                     <form class="row d-flex justify-content-end g-3 align-items-center"
-                          action="/company/scrap/{{resume.id}}/detail/offer" method="post">
+                          action="/company/scrap/{{id}}/detail/offer" method="post">
                         <div class="col-auto">
                             <select class="form-select form-select-sm" aria-label="Default select example"
-                                    id="postChoice"
-                                    name="postChoice">
-                                <option selected>채용 공고 선택</option>
+                                    id="postChoice" name="postChoice">
+                                <option selected>채용 공고를 선택해주세요</option>
                                 {{#postList}}
                                     <option value="{{id}}">{{title}}</option>
                                 {{/postList}}
-
                             </select>
                         </div>
                         <div class="col-auto">
@@ -36,7 +36,6 @@
                             </button>
                         </div>
                     </form>
-
 
                 </div>
 
@@ -100,8 +99,6 @@
                                 {{introduce}}
                             </textarea>
                         </div>
-
-
                     </div>
                 </div>
             </div>

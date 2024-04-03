@@ -31,7 +31,7 @@ public class ScrapRepository {
     }
 
     @Transactional
-    public void saveResume(ScrapRequest.SaveResumeDTO requestDTO) {
+    public void saveResume(ScrapRequest. SaveResumeDTO requestDTO) {
         Query query = em.createNativeQuery("insert into scrap_tb(resume_id, company_id, created_at) values(?,?,now())");
         query.setParameter(1, requestDTO.getResumeId());
         query.setParameter(2, requestDTO.getCompanyId());
