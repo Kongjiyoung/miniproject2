@@ -66,7 +66,7 @@ public class ApplyService {
             return applyPostSkillDTOList.add(ApplyResponse.ApplyPostSkillDTO.builder()
                     .apply(apply)
                     .post(apply.getPost())
-                    .skllList(apply.getPost().getSkillList())
+                    .skillList(apply.getPost().getSkillList())
                     .build());
         }).collect(Collectors.toList());
 

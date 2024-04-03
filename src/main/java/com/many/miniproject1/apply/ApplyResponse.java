@@ -266,20 +266,22 @@ public class ApplyResponse {
         private String title;
         private String career;
         private String workingArea;
-        private List<SkillDTO> skllList;
+        private List<SkillDTO> skillList;
         private String isPass;
+        private Post post; // 뷰에 뿌릴려고 추가
 
         @Builder
-        public ApplyPostSkillDTO(Apply apply, Post post, List<Skill> skllList) {
+        public ApplyPostSkillDTO(Apply apply, Post post, List<Skill> skillList) {
             this.id = apply.getId();
             this.profile = post.getProfile();
             this.title = post.getTitle();
             this.career = post.getCareer();
             this.workingArea = post.getWorkingArea();
-            this.skllList = skllList.stream().map(skill -> {
+            this.skillList = skillList.stream().map(skill -> {
                 return new SkillDTO(skill);
             }).collect(Collectors.toList());
             this.isPass = apply.getIsPass();
+            this.post = post; // 뷰에 뿌릴려고 추가
         }
 
         @Data

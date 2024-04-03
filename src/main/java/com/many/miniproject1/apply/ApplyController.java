@@ -70,6 +70,7 @@ public class ApplyController {
         User sessionUser=(User) session.getAttribute("sessionUser");
         List<ApplyResponse.ApplyPostSkillDTO> applyPostSkillDTOList = applyService.getApplyPostSkillDTOs(sessionUser.getId());
         request.setAttribute("applyList", applyPostSkillDTOList);
+        System.out.println("applyPostSkillDTOList = " + applyPostSkillDTOList);
 
         return "person/applies";
     }
