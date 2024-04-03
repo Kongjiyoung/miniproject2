@@ -15,23 +15,23 @@
                         <table class="resume_table">
                             <tr>
                                 <td>이름</td>
-                                <td>{{resume.user.name}}</td>
+                                <td>{{resume.name}}</td>
                             </tr>
                             <tr>
                                 <td>생년월일</td>
-                                <td>{{resume.user.birth}}</td>
+                                <td>{{resume.birth}}</td>
                             </tr>
                             <tr>
                                 <td>연락처</td>
-                                <td>{{resume.user.tel}}</td>
+                                <td>{{resume.tel}}</td>
                             </tr>
                             <tr>
                                 <td>주소</td>
-                                <td>{{resume.user.address}}</td>
+                                <td>{{resume.address}}</td>
                             </tr>
                             <tr>
                                 <td>이메일</td>
-                                <td>{{resume.user.email}}</td>
+                                <td>{{resume.email}}</td>
                             </tr>
                         </table>
                     </div>
@@ -50,10 +50,10 @@
                         <div>
                             <h6>
                                 <span>
-                                    {{#resume.skillList}}
+                                    {{#resume.skills}}
                                         <button class="btn btn-outline-warning btn-sm disabled">{{skill}}
                                     </button>
-                                    {{/resume.skillList}}
+                                    {{/resume.skills}}
 
                                 </span>
                             </h6>

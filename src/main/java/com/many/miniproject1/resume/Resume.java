@@ -34,6 +34,7 @@ public class Resume {
 
     private String title;
     private String profile;
+    private String profileName;
     private String portfolio;
     private String introduce;
     private String career;

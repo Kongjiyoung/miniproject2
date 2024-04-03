@@ -32,9 +32,35 @@ public class ResumeService {
 
     private final UserJPARepository userJPARepository;
 
+    // 이력서 목록
+    public List<ResumeResponse.ResumeListDTO> findResumeList(Integer userId) {
+        List<Resume> resumeList = resumeJPARepository.findByUserIdJoinSkillAndUser(userId);
+        return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
+    }
 
+
+    // 이력서 작성
     @Transactional
-    public Resume update(int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+    public ResumeResponse.ResumeSaveDTO save(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
+
+        Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
+
+        List<Skill> skills = new ArrayList<>();
+        for (String skillName : reqDTO.getSkills()) {
+            SkillResponse.SaveDTO skill = new SkillResponse.SaveDTO();
+            skill.setResume(resume);
+            skill.setSkill(skillName);
+            skills.add(skill.toEntity());
+        }
+
+        List<Skill> skillList = skillJPARepository.saveAll(skills);
+
+        return new ResumeResponse.ResumeSaveDTO(resume, skillList);
+    }
+
+    // 이력서 수정
+    @Transactional
+    public ResumeResponse.UpdateDTO update(int resumeId, ResumeRequest.UpdateDTO requestDTO) {
 
         Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
@@ -46,10 +72,12 @@ public class ResumeService {
         resume.setSimpleIntroduce(requestDTO.getSimpleIntroduce());
         resume.setProfile(ProfileImageSaveUtil.save(requestDTO.getProfile()));
 
+        // 스킬 수정
         List<Skill> skills = skillJPARepository.findSkillsByResumeId(resume.getId());
         for (Skill skill : skills) {
             skillJPARepository.deleteSkillsByResumeId(resume.getId());
         }
+
         List<Skill> skills1 = new ArrayList<>();
         for (String skillName : requestDTO.getSkills()) {
             SkillResponse.SaveDTO skill = new SkillResponse.SaveDTO();
@@ -59,55 +87,34 @@ public class ResumeService {
         }
 
         List<Skill> skillList = skillJPARepository.saveAll(skills1);
-        return resume;
+
+        return new ResumeResponse.UpdateDTO(resume, skillList);
     }
 
-    public Resume findByResume(int id) {
-        Resume resume = resumeJPARepository.findById(id)
+    public ResumeResponse.UpdateFormDTO findByResume(int resumeId) {
+        Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다"));
-        return resume;
-    }
 
-    @Transactional
-    public Resume save(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
-
-        Resume resume = resumeJPARepository.save(requestDTO.toEntity(sessionUser));
-
-        List<Skill> skills = new ArrayList<>();
-        for (String skillName : requestDTO.getSkills()) {
-            SkillResponse.SaveDTO skill = new SkillResponse.SaveDTO();
-            skill.setResume(resume);
-            skill.setSkill(skillName);
-            skills.add(skill.toEntity());
-        }
-
-        List<Skill> skillList = skillJPARepository.saveAll(skills);
-
-
-        return resume;
+        return new ResumeResponse.UpdateFormDTO(resume);
     }
 
 
-    public Resume getResumeDetail(int resumeId) {
-        return resumeJPARepository.findByIdJoinSkillAndUser(resumeId);
+    public ResumeResponse.ResumeDetailDTO getResumeDetail(int resumeId) {
+        Resume resume = resumeJPARepository.findByIdJoinSkillAndUser(resumeId);
+        return new ResumeResponse.ResumeDetailDTO(resume);
     }
+//    public Resume getResumeSkill(ResumeResponse.DetailDTO respDTO) {
+//        ResumeRequest.ResumeDTO resumeDTO = new ResumeRequest.ResumeDTO();
+//        List<Resume> resumeList = findResumeList(resumeDTO.getId());
+//        ArrayList<ResumeResponse.DetailSkillDTO> resumeSkillList = new ArrayList<>();
+//        for (int i = 0; i < resumeList.size(); i++) {
+//            List<Skill> skills = skillJPARepository.findSkillsByResumeId(resumeList.get(i).getId());
+//            Resume resume = resumeList.get(i);
+//            resumeSkillList.add(new ResumeResponse.DetailSkillDTO(resume, skills));
+//        }
+//        return resumeJPARepository.findByIdJoinSkill(respDTO.getId());
 
-    public Resume getResumeSkill(ResumeResponse.DetailDTO respDTO) {
-        ResumeRequest.ResumeDTO resumeDTO = new ResumeRequest.ResumeDTO();
-        List<Resume> resumeList = findResumeList(resumeDTO.getId());
-        ArrayList<ResumeResponse.DetailSkillDTO> resumeSkillList = new ArrayList<>();
-        for (int i = 0; i < resumeList.size(); i++) {
-            List<Skill> skills = skillJPARepository.findSkillsByResumeId(resumeList.get(i).getId());
-            Resume resume = resumeList.get(i);
-            resumeSkillList.add(new ResumeResponse.DetailSkillDTO(resume, skills));
-        }
-        return resumeJPARepository.findByIdJoinSkill(respDTO.getId());
-    }
-
-    public List<Resume> findResumeList(Integer userId) {
-
-        return resumeJPARepository.findByUserIdJoinSkillAndUser(userId);
-    }
+//    }
 
     @Transactional
     public void deleteResume(Integer resumeId) {

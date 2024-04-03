@@ -1,11 +1,9 @@
 package com.many.miniproject1.offer;
 
-import com.many.miniproject1.post.Post;
 import com.many.miniproject1.skill.Skill;
-import com.many.miniproject1.user.User;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

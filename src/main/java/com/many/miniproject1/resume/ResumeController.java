@@ -21,51 +21,51 @@ public class ResumeController {
     private final ResumeService resumeService;
     private final HttpSession session;
 
-    //개인 이력서 관리
+    // 목록보기
     @GetMapping("/person/resume")
     public String personResumeForm(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Resume> resumeList = resumeService.findResumeList(sessionUser.getId());
-        request.setAttribute("resumeList",resumeList);
+        List<ResumeResponse.ResumeListDTO> respDTO = resumeService.findResumeList(sessionUser.getId());
+        request.setAttribute("resumeList",respDTO);
         return "person/resumes";
     }
-
+    // 상세보기
     @GetMapping("/person/resume/{id}/detail")
     public String personResumeDetailForm(@PathVariable int id, HttpServletRequest request) {
-        Resume resume = resumeService.getResumeDetail(id);
-        request.setAttribute("resume", resume);
+        ResumeResponse.ResumeDetailDTO respDTO = resumeService.getResumeDetail(id);
+        request.setAttribute("resume", respDTO);
         return "person/resume-detail";
     }
-
+    // 작성
+    @PostMapping("/person/resume/save")
+    public String personSaveResume(ResumeRequest.SaveDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ResumeResponse.ResumeSaveDTO respDTO = resumeService.save(reqDTO, sessionUser);
+        return "redirect:/person/resume";
+    }
+    // 작성 폼
     @GetMapping("/person/resume/save-form")
     public String personSaveResumeForm() {
         return "person/resume-save-form";
     }
 
-    @PostMapping("/person/resume/save")
-    public String personSaveResume(ResumeRequest.SaveDTO requestDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        //나중에 findById 해서 그 user 넣어야하는 거 아녀? 일단은 이렇게 둠
-        System.out.println("requestDTO = " + requestDTO);
-        Resume resume = resumeService.save(requestDTO, sessionUser);
-        return "redirect:/person/resume";
+    // 수정
+    @PostMapping("/person/resume/{id}/detail/update")
+    public String personUpdateResume(@PathVariable int id, ResumeRequest.UpdateDTO reqDTO) {
+//        System.out.println("requestDTO = " + reqDTO);
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+        resumeService.update(id, reqDTO);
+        return "redirect:/person/resume/" + id + "/detail";
     }
-
+    // 수정 폼
     @GetMapping("/person/resume/detail/{id}/update-form")
     public String personUpdateResumeForm(@PathVariable int id, HttpServletRequest request) {
-        Resume resume = resumeService.findByResume(id);
-        request.setAttribute("resume", resume);
+        ResumeResponse.UpdateFormDTO respDTO = resumeService.findByResume(id);
+        request.setAttribute("resume", respDTO);
         return "person/resume-update-form";
     }
 
-    @PostMapping("/person/resume/{id}/detail/update")
-    public String personUpdateResume(@PathVariable int id, ResumeRequest.UpdateDTO requestDTO) {
-        System.out.println("requestDTO = " + requestDTO);
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.update(id, requestDTO);
-        return "redirect:/person/resume/" + id + "/detail";
-    }
-
+    // 삭제
     @PostMapping("/person/resume/{id}/delete")
     public String personDeleteResume(@PathVariable Integer id) {
         resumeService.deleteResume(id);

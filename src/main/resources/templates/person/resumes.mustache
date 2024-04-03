@@ -26,7 +26,7 @@
                             -webkit-box-orient: vertical;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                          "><b>{{user.name}}</b></h5>
+                          "><b>{{name}}</b></h5>
                             <h5 class="card-title" style="
                             display: -webkit-box;
                             -webkit-line-clamp: 1;
@@ -50,10 +50,13 @@
                           overflow: hidden;
                           text-overflow: ellipsis;
                         ">
-                                <h6><span>{{#skillList}}
+                                <h6>
+                                    {{#skills}}
                                         <button class="btn btn-outline-warning btn-sm disabled">
                                             {{skill}}
-                                        </button>{{/skillList}}</span></h6>
+                                        </button>
+                                    {{/skills}}
+                                </h6>
                             </div>
                         </div>
                     </a>
