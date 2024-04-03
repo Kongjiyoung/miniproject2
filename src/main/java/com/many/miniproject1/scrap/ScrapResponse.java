@@ -1,6 +1,7 @@
 package com.many.miniproject1.scrap;
 
 import com.many.miniproject1.offer.OfferResponse;
+import com.many.miniproject1.post.Post;
 import com.many.miniproject1.resume.Resume;
 import com.many.miniproject1.skill.Skill;
 import lombok.Data;
@@ -91,6 +92,7 @@ public class ScrapResponse {
     @Data
     public static class ScrapPostDetailDTO {
         private Integer id;
+        private Post post;
         private Integer companyId;
         private String companyName;
         private String title;
@@ -106,7 +108,8 @@ public class ScrapResponse {
         private List<PostSkillDTO> skillList;
 
         public ScrapPostDetailDTO(Scrap scrap) {
-            this.id = scrap.getId();
+            this.id=scrap.getId();
+            this.post = scrap.getPost();
             this.companyId = scrap.getPost().getUser().getId();
             this.companyName = scrap.getPost().getUser().getCompanyName();
             this.title = scrap.getPost().getTitle();

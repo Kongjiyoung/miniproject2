@@ -48,6 +48,11 @@ public class ScrapService {
         return new ScrapResponse.ScrapResumeDetailDTO(scrap);
     }
 
+    public ScrapResponse.ScrapPostDetailDTO scrapPostDetail(Integer scrapId) {
+        Scrap scrap = scrapJPARepository.findByScrapIdJoinPost(scrapId);
+        return new ScrapResponse.ScrapPostDetailDTO(scrap);
+    }
+
     public Scrap findById(int id) {
         Scrap scrap = scrapJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
@@ -86,12 +91,6 @@ public class ScrapService {
         Apply apply = applyJPARepository.save(scrapApplyDTO.toEntity());
 
         return new ApplyResponse.ChoiceDTO(apply);
-    }
-
-    public ScrapResponse.ScrapPostDetailDTO scrapPostDetail(Integer scrapId) {
-        Scrap scrap = scrapJPARepository.findByScrapIdJoinPost(scrapId)
-                .orElseThrow(() -> new Exception404("스크랩한 공고를 찾을 수 없습니다"));
-        return new ScrapResponse.ScrapPostDetailDTO(scrap);
     }
 
     public List<Post> companyPostList(int id) {
