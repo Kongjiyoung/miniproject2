@@ -22,15 +22,16 @@ public class PostController {
     @GetMapping("/company/posts")
     public String companyPosts(HttpServletRequest request) { // 이 페이지는 포스트들을 확인할 수 있는 페이지라 이름 변경했습니다.
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Post> postList =postService.getResumeList(sessionUser.getId());
-        request.setAttribute("postlist", postList);
+        List<PostResponse.PostListDTO> postList =postService.getPostList(sessionUser.getId());
+        request.setAttribute("postList", postList);
         return "company/posts";
     }
 
     // 공고 상세보기 YSH
     @GetMapping("/company/posts/{id}")
     public String companyPostDetailForm(HttpServletRequest request, @PathVariable Integer id) {
-        Post post = postService.postDetail(id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        PostResponse.DetailDTO post = postService.postDetail(id,sessionUser);
         request.setAttribute("post",post);
         return "company/post-detail";
     }

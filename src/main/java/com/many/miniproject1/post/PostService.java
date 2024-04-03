@@ -45,7 +45,7 @@ public class PostService {
     }
 
     @Transactional
-    public Post save(PostRequest.PostSaveDTO reqDTO, User sessionUser){
+    public PostResponse.PostDTO save(PostRequest.PostSaveDTO reqDTO, User sessionUser){
         Post post = postJPARepository.save(reqDTO.toEntity(sessionUser));
 
         List<Skill> skills = new ArrayList<>();
@@ -56,17 +56,18 @@ public class PostService {
             skills.add(skill.toEntity());
         }
         skillJPARepository.saveAll(skills);
-        return post;
+        return new PostResponse.PostDTO(post,sessionUser);
     }
 
-    public List<Post> getResumeList(Integer userId){
-        return postJPARepository.findByUserIdJoinSkillAndUser(userId);
+    public List<PostResponse.PostListDTO> getPostList(Integer userId){
+        List<Post> postList = postJPARepository.findByPost(userId);
+        return postList.stream().map(post -> new PostResponse.PostListDTO(post)).toList();
     }
 
-    // 공고 상세보기 YSH
-    public Post postDetail (int postId){
+    // 공고 상세보기
+    public PostResponse.DetailDTO postDetail (int postId, User sessionUser){
         Post post = postJPARepository.findByIdJoinSkillAndCompany(postId);
-        return post;
+        return new PostResponse.DetailDTO(post);
     }
 
     @Transactional

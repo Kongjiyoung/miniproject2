@@ -43,6 +43,7 @@ public class PostJPARepositoryTest {
 
         // when
         Post post = postJPARepository.findByIdJoinSkillAndCompany(id);
+        System.out.println("test::" +post);
 
         // then
         assertThat(post.getId()).isEqualTo(1);
@@ -90,4 +91,13 @@ public class PostJPARepositoryTest {
         assertThat(post.getUser().getName()).isEqualTo("김인사");
         assertThat(post.getSkillList().size()).isEqualTo(3);
     }
+    @Test
+        public void findByPost_test(){
+            // given
+        int id = 14;
+            // when
+        List<Post> postList = postJPARepository.findByPost(id);
+        System.out.println("test::" + postList);
+            // then
+        }
 }
