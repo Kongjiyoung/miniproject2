@@ -1,39 +1,43 @@
 {{> layout/header}}
 <!--<div class="container justify-content-center mt-4 mb-5">-->
 <div class="container d-flex">
-    <div class="border hs_content_box w-100 mx-2 b-5 rounded shadow">
+    <div class=" mx-2 pb-4 w-100">
         <div class="px-5 pt-5 pb-2">
         </div>
         {{#scrap}}
-            <div class="px-5">
-                <input style="display: none" id="companyId">
-                <div class="d-flex justify-content-start align-items-center">
-                    <div class="col">
-                        <h3 style="font-weight: bold">{{title}}</h3>
+            <div class="border border-tertiary p-5 rounded shadow">
+                <div class="px-5">
+                    <input style="display: none" id="personId">
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div class="col">
+                            <h3 style="font-weight: bold">{{title}}</h3>
+                        </div>
+                        <form action="/person/scrap/{{id}}/detail/delete" method="post">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-outline-success" type="submit">취소하기</button>
+                            </div>
+                        </form>
                     </div>
-                    <form action="/person/scrap/{{id}}/detail/delete" method="post">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-outline-success" type="submit">취소하기</button>
+                    <hr class="d-inline-flex w-100">
+                    <form class="row d-flex justify-content-end g-3 align-items-center"
+                          action="/person/scrap/{{id}}/detail/apply" method="post">
+                        <div class="col-auto">
+                            <select class="form-select form-select-sm" aria-label="Default select example"
+                                    id="resumeChoice"
+                                    name="resumeChoice">
+                                <option selected>이력서를 선택해 주세요</option>
+                                {{#resumeList}}
+                                    <option value="{{id}}">{{title}}</option>
+                                {{/resumeList}}
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-success btn-sm" type="submit"><i
+                                    class="far fa-paper-plane"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
-                <hr class="d-inline-flex w-100">
-                <form class="row d-flex justify-content-end g-3 align-items-center"
-                      action="/person/scrap/{{post.id}}/detail/apply" method="post">
-                    <div class="col-auto">
-                        <select class="form-select form-select-sm" aria-label="Default select example" id="resumeChoice"
-                                name="resumeChoice">
-                            <option selected>이력서를 선택해 주세요</option>
-                            {{#resumeList}}
-                                <option value="{{id}}">{{title}}</option>
-                            {{/resumeList}}
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-outline-success btn-sm" type="submit"><i class="far fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
                 <div class="pt-2 mt-3">
                     <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
                         <div>
@@ -88,12 +92,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <!--                <a href="/company/post/detail/{id}/updateForm" class="btn btn-outline-success mb-3"-->
-                    <!--                        style="width: 100%">수정하기-->
-                    <!--                </a> -->
-
                 </div>
             </div>
         {{/scrap}}
