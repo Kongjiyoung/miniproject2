@@ -93,8 +93,8 @@ public class MainController {
     }
 
     @PostMapping("/resumes/{id}/offer")
-    public String companyResumeOffer(@PathVariable Integer id, OfferRequest.MainOfferSaveDTO reqDTO) {
-        mainService.sendPostToResume(id, reqDTO.getPostId());
+    public String companyResumeOffer(@PathVariable Integer id, MainRequest.PostChoiceDTO postChoice) {
+        mainService.sendPostToResume(id, postChoice.getPostChoice());
         return "redirect:/resumes/" + id;
     }
 
@@ -144,8 +144,8 @@ public class MainController {
             if (role.equals("company")) {
                 isCompany = true;
             }
-            Integer personId = sessionUser.getId();
-            List<MainResponse.ApplyListDTO> resumeList = mainService.getResumeId(personId);
+            Integer companyId = sessionUser.getId();
+            List<Resume> resumeList = mainService.findByUserIdResume(companyId);
             request.setAttribute("resumeList", resumeList);
         }
 

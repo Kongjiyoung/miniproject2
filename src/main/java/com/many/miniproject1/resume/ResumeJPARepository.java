@@ -26,7 +26,7 @@ public interface ResumeJPARepository extends JpaRepository<Resume, Integer> {
     Resume findByIdJoinSkill(@Param("id") int id);
 
     @Query("""
-            SELECT r
+            SELECT distinct r
             FROM Resume r
             JOIN FETCH r.user ru
             WHERE ru.id = :id

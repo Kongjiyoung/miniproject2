@@ -5,47 +5,48 @@
         <div class="px-5 pt-5 pb-2">
         </div>
         <div class="px-5">
-            {{#post}}
-                <div class="row align-items-center">
-                    <!-- title -->
-                    <div class="col">
-                        <h3 style="font-weight: bold">{{title}}</h3>
-                    </div>
-                    {{#sessionuser}}
-                        {{^isMatchingCompany}}
-                            <!-- 스크랩 -->
-                            <div class="col-auto">
-                                <form action="/posts/{{id}}/scrap" method="post">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-outline-success" type="submit">스크랩하기</button>
-                                    </div>
-                                </form>
-                            </div>
-                        {{/isMatchingCompany}}
-                    {{/sessionuser}}
+
+            <div class="row align-items-center">
+                <!-- title -->
+                <div class="col">
+                    <h3 style="font-weight: bold">{{post.title}}</h3>
                 </div>
-                <hr class="d-inline-flex w-100">
-                <!--  지원, 스크랩 버튼-->
                 {{#sessionuser}}
                     {{^isMatchingCompany}}
-                        <!-- 이력서 선택/보내기 -->
-                        <form class="row d-flex justify-content-end g-3" action="/posts/{{id}}/apply" method="post">
-                            <div class="col-auto">
-                                <select class="form-select" aria-label="Default select example"
-                                        id="resumeChoice" name="resumeChoice">
-                                    <option selected>이력서 선택</option>
-                                    {{#resumeList}}
-                                        <option value="{{id}}">{{title}}</option>
-                                    {{/resumeList}}
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <button class=" btn btn-outline-success" type="submit"><i class="far fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <!-- 스크랩 -->
+                        <div class="col-auto">
+                            <form action="/posts/{{id}}/scrap" method="post">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-success" type="submit">스크랩하기</button>
+                                </div>
+                            </form>
+                        </div>
                     {{/isMatchingCompany}}
                 {{/sessionuser}}
+            </div>
+            <hr class="d-inline-flex w-100">
+            <!--  지원, 스크랩 버튼-->
+            {{#sessionuser}}
+                {{^isMatchingCompany}}
+                    <!-- 이력서 선택/보내기 -->
+                    <form class="row d-flex justify-content-end g-3" action="/posts/{{id}}/apply" method="post">
+                        <div class="col-auto">
+                            <select class="form-select" aria-label="Default select example"
+                                    id="resumeChoice" name="resumeChoice">
+                                <option selected>이력서 선택</option>
+                                {{#resumeList}}
+                                    <option value="{{id}}">{{title}}</option>
+                                {{/resumeList}}
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class=" btn btn-outline-success" type="submit"><i class="far fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                {{/isMatchingCompany}}
+            {{/sessionuser}}
+            {{#post}}
                 <div class="pt-5 mt-3">
                     <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
                         <div>

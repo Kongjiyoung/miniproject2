@@ -204,7 +204,7 @@ public class MainService {
 //    }
 
     public List<Post> getPostsByCompanyId(Integer companyId) {
-        return postJPARepository.findByUserIdJoinSkillAndUser(companyId);
+        return postJPARepository.findByPost(companyId);
     }
 
     public MainResponse.PostDetailDTO getPostDetail(Integer postId) {
