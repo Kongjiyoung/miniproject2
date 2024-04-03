@@ -1,5 +1,6 @@
 package com.many.miniproject1.main;
 
+import com.many.miniproject1.apply.ApplyResponse;
 import com.many.miniproject1.offer.Offer;
 import com.many.miniproject1.offer.OfferRequest;
 import com.many.miniproject1.post.Post;
@@ -109,8 +110,6 @@ public class MainController {
     //메인 채용 공고
     @GetMapping({"/person/main", "/"})
     public String postForm(HttpServletRequest request) {
-        List<MainResponse.mainPostsDTO> postList = mainService.getPostList();
-        request.setAttribute("postList", postList);
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -126,6 +125,8 @@ public class MainController {
         }
 
 
+        List<Post> postList = mainService.postForm();
+        request.setAttribute("postList", postList);
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
 
@@ -144,7 +145,7 @@ public class MainController {
                 isCompany = true;
             }
             Integer personId = sessionUser.getId();
-            List<MainResponse.ApplyListDTO> resumeList = mainService.getResumeId(sessionUser.getId());
+            List<MainResponse.ApplyListDTO> resumeList = mainService.getResumeId(personId);
             request.setAttribute("resumeList", resumeList);
         }
 
@@ -160,7 +161,6 @@ public class MainController {
     @PostMapping("/posts/{id}/apply")
     public String personPostApply(@PathVariable int id, MainRequest.ResumeChoiceDTO resumeChoice) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
         mainService.personPostApply(id, resumeChoice.getResumeChoice());
         return "redirect:/posts/" + id;
     }
@@ -183,19 +183,19 @@ public class MainController {
     @GetMapping("/company/matching")
     public String matchingResumeForm(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<MainResponse.PosteMatchingChoiceDTO> postList = mainService.findByUserIdPost(sessionUser.getId());
-        request.setAttribute("posts", postList);
+        List<Post> posts = mainService.findByUserIdPost(sessionUser.getId());
+        request.setAttribute("posts", posts);
         Integer postChoice = (Integer) session.getAttribute("postChoice");
         if (postChoice != null) {
-            List<MainResponse.MainPostMatchDTO> resumeList = mainService.matchingResume(postChoice);
+            List<Resume> resumeList = mainService.matchingResume(postChoice);
             request.setAttribute("resumeList", resumeList);
         }
         return "company/matching";
     }
 
     @PostMapping("/company/match")
-    public String matchingPost(MainRequest.PostChoiceDTO postChoiceDTO) {
-        session.setAttribute("postChoice", postChoiceDTO.getPostChoice());
+    public String matchingPost(int postChoice) {
+        session.setAttribute("postChoice", postChoice);
         return "redirect:/company/matching";
     }
 
@@ -204,11 +204,11 @@ public class MainController {
     public String matchingPostForm(HttpServletRequest request) {
         //공고 가져오기
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<MainResponse.ResumeeMatchingChoiceDTO> resumeList = mainService.findByUserIdResume(sessionUser.getId());
+        List<Resume> resumeList = mainService.findByUserIdResume(sessionUser.getId());
         request.setAttribute("resumeList", resumeList);
         Integer resumeChoice = (Integer) session.getAttribute("resumeChoice");
         if (resumeChoice != null) {
-            List<MainResponse.MainResumeMatchDTO> postList = mainService.matchingPost(resumeChoice);
+            List<Post> postList = mainService.matchingPost(resumeChoice);
             request.setAttribute("postList", postList);
         }
 
@@ -216,8 +216,8 @@ public class MainController {
     }
 
     @PostMapping("/person/match")
-    public String matchingResume(MainRequest.ResumeChoiceDTO resumeChoiceDTO) {
-        session.setAttribute("resumeChoice", resumeChoiceDTO.getResumeChoice());
+    public String matchingResume(int resumeChoice) {
+        session.setAttribute("resumeChoice", resumeChoice);
         return "redirect:/person/matching";
     }
 }
