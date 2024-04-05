@@ -53,7 +53,13 @@
                           overflow: hidden;
                           text-overflow: ellipsis;
                         ">
-                            <h6><span>{{#resume.skillList}}
+                            <h6 style="
+                          display: -webkit-box;
+                          -webkit-line-clamp: 1;
+                          -webkit-box-orient: vertical;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                        "><span>{{#resume.skillList}}
                                         <button class="btn btn-outline-warning btn-sm disabled">
                                             {{skill}}
                                         </button>{{/resume.skillList}}</span></h6>

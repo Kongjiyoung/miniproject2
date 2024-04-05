@@ -15,7 +15,7 @@
             {{#resumeList}}
                 <li class="card col" style="width: 15rem; padding: 0px !important; border: 0">
                     <a href="/person/resume/{{id}}/detail" style="text-decoration: none; color: black">
-                        <div style="width: 100%; height: 15rem; overflow: hidden">
+                        <div style="width: 240px; height: 240px; overflow: hidden">
                             <img src="/images/{{profile}}" class="card-img-top" alt="이력서 사진"/>
                         </div>
 
@@ -43,17 +43,17 @@
                           text-overflow: ellipsis;
                         ">{{simpleIntroduce}}
                             </p>
-                            <div class="d-flex justify-content-start" style="
+                            <div class="d-flex justify-content-start">
+                                <h6 style="
                           display: -webkit-box;
                           -webkit-line-clamp: 1;
                           -webkit-box-orient: vertical;
                           overflow: hidden;
                           text-overflow: ellipsis;
-                        ">
-                                <h6><span>{{#skillList}}
-                                        <button class="btn btn-outline-warning btn-sm disabled">
-                                            {{skill}}
-                                        </button>{{/skillList}}</span></h6>
+                        "><span>{{#skillList}}
+                                    <button class="btn btn-outline-warning btn-sm disabled">
+                                        {{skill}}
+                                    </button>{{/skillList}}</span></h6>
                             </div>
                         </div>
                     </a>
@@ -62,13 +62,13 @@
                             <button class="btn btn-outline-danger mb-3" style="width: 100%">삭제하기</button>
                         </form>
                     </div>
-<!--                    <div class="d-flex justify-content-center">-->
-<!--                        <div id="defaultResumeid" class="default-resume" style="display: none;">-->
-<!--                            <form action="/person/resume/1/detail" method="post" style="width: 100%">-->
-<!--                                <button class="btn btn-outline-success w-100">기본이력서</button>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="d-flex justify-content-center">-->
+                    <!--                        <div id="defaultResumeid" class="default-resume" style="display: none;">-->
+                    <!--                            <form action="/person/resume/1/detail" method="post" style="width: 100%">-->
+                    <!--                                <button class="btn btn-outline-success w-100">기본이력서</button>-->
+                    <!--                            </form>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </li>
             {{/resumeList}}
 

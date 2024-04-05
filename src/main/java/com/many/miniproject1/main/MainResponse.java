@@ -59,4 +59,16 @@ public class MainResponse {
         }
 
     }
+
+    @Data
+    public static class MatchingPostSkillDTO {
+        int postId;
+        int score;
+
+        public MatchingPostSkillDTO(int postId, int i) {
+            this.postId = postId;
+            this.score = i;
+        }
+
+    }
 }

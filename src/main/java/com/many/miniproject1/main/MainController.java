@@ -203,9 +203,15 @@ public class MainController {
     //맞춤 공고 - 개인이 보는 매칭 공고
     @GetMapping("/person/matching")
     public String matchingPostForm(HttpServletRequest request) {
-        //공고 가져오기
         User sessionUser = (User) session.getAttribute("sessionUser");
-
+        List<Resume> resumes = mainService.findByUserIdResume(sessionUser.getId());
+        request.setAttribute("resumes", resumes);
+        Integer resumeChoice = (Integer) session.getAttribute("resumeChoice");
+        // TODO: session 저장
+        if (resumeChoice != null) {
+            List<Post> postList = mainService.matchingPost(resumeChoice);
+            request.setAttribute("postList", postList);
+        }
         return "person/matching";
     }
 
