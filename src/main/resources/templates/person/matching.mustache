@@ -31,8 +31,9 @@
                 <div style="width: 100%;">
                     <select class="form-select" aria-label="Default select example" id="resumeChoice" name="resumeChoice">
                         <option selected disabled>이력서를 선택해 주세요.</option>
-                        이력서반복문
-                        <option value="이력서아이디">이력서제목</option>
+                        {{#resumes}}
+                            <option value="{{id}}">{{title}}</option>
+                        {{/resumes}}
                     </select>
                 </div>
             </div>
