@@ -36,6 +36,13 @@ public class ScrapService {
     public Apply saveApply(int id, int  resumeChoice){
        Scrap scrap =scrapJPARepository.findById(id).orElseThrow(() -> new Exception404(""));
        Resume resume = resumeJPARepository.findById(resumeChoice).orElseThrow(()-> new Exception404(""));
+
+       // 이건 무서운 창으로 가긴 힘
+        boolean isAlreadyApplied = applyJPARepository.existsByResumeAndPost(resume, scrap.getPost());
+        if (isAlreadyApplied) {
+            throw new IllegalStateException("해당 이력서로 이미 지원한 채용공고입니다.");
+        }
+
        ApplyRequest.SaveDTO saveApply=new ApplyRequest.SaveDTO(resume, scrap.getPost());
        Apply apply=applyJPARepository.save(saveApply.toEntity());
        return apply;

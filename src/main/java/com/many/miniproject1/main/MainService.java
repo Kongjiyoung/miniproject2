@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -43,6 +44,21 @@ public class MainService {
     private final UserJPARepository userJPARepository;
     private final SkillJPARepository skillJPARepository;
     private final UserService userService;
+
+    public List<MainResponse.PostSkillDTO> postSkillDTO (){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List <Post> postList = postJPARepository.findAll(sort);
+
+        List<MainResponse.PostSkillDTO> postSkillDTOlist = new ArrayList<>();
+
+        postList.stream().map(post -> {
+            return postSkillDTOlist.add(MainResponse.PostSkillDTO.builder()
+                    .post(post)
+                    .skillList(post.getSkillList())
+                    .build());
+        }).collect(Collectors.toList());
+        return postSkillDTOlist;
+    }
 
     public Scrap personPostScrap(Integer userId, Integer postId){
         User user = userService.findByUser(userId);

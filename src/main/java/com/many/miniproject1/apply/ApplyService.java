@@ -25,7 +25,6 @@ public class ApplyService {
     private final ApplyJPARepository applyJPARepository;
     private final SkillJPARepository skillJPARepository;
 
-
     @Transactional
     public Apply isPassResume(ApplyRequest.UpdateIsPass reqDTO) {
         // 1. 이력서 찾기
@@ -37,8 +36,6 @@ public class ApplyService {
         return apply;
     }
 
-
-  
     public List<Apply> companyResumes(Integer userId) {
 
         applyJPARepository.findByUserIdJoinPost(userId);
@@ -47,9 +44,6 @@ public class ApplyService {
 
         return applyJPARepository.findByUserIdJoinPost(userId);
     }
-
-
-
 
     public Apply companyResumeDetail(int id){
         Apply apply = applyJPARepository.findByResumeIdJoinSkillAndCompany(id);

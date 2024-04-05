@@ -1,5 +1,7 @@
 package com.many.miniproject1.apply;
 
+import com.many.miniproject1.post.Post;
+import com.many.miniproject1.resume.Resume;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -68,4 +70,7 @@ public interface ApplyJPARepository extends JpaRepository<Apply, Integer> {
             where a.post.id = :post_id
                     """)
     void deleteByPostId(@Param("post_id") Integer postId);
+
+    boolean existsByResumeAndPost(Resume resume, Post post);
+
 }

@@ -90,7 +90,7 @@ public class MainController {
     @PostMapping("/resumes/{id}/offer")
     public String companyResumeOffer(@PathVariable int id,int postChoice) {
         Offer offer = mainService.sendPostToResume(id, postChoice);
-        return "redirect:/resume/detail/" + id;
+        return "redirect:/resumes/" + id;
     }
 
     @PostMapping("/resumes/{id}/scrap")
@@ -99,15 +99,11 @@ public class MainController {
         Scrap scrap = mainService.companyScrap(id, sessionUser.getId());
         return "redirect:/resumes/" + id;
     }
-    // YSH
-    // ┳━┳ ノ( ゜-゜ノ)
 
     //메인 채용 공고
     @GetMapping({"/person/main", "/"})
     public String postForm(HttpServletRequest request) {
-        List<Post> postList = mainService.getPostList();
 
-        request.setAttribute("postList", postList);
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -122,7 +118,10 @@ public class MainController {
             }
         }
 
+//        List<Post> postList = mainService.getPostList();
+        List<MainResponse.PostSkillDTO> postSkillDTOList = mainService.postSkillDTO();
 
+        request.setAttribute("postList", postSkillDTOList);
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
 

@@ -17,7 +17,8 @@
                 </form>
             </div>
             <hr class="d-inline-flex w-100">
-            <form class="row d-flex justify-content-end g-3 align-items-center"
+            <hr class="d-inline-flex w-100">
+            <form id="applyForm" class="row d-flex justify-content-end g-3 align-items-center"
                   action="/person/scrap/{{scrap.id}}/detail/apply" method="post">
                 <div class="col-auto">
                     <select class="form-select form-select-sm" aria-label="Default select example" id="resumeChoice"
@@ -29,10 +30,43 @@
                     </select>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-outline-success btn-sm" type="submit"><i class="far fa-paper-plane"></i>
+                    <button id="applyButton" class="btn btn-outline-success btn-sm" type="submit"><i
+                            class="far fa-paper-plane"></i>
                     </button>
                 </div>
             </form>
+            <script>
+                $('#applyButton').click(function () {
+                    let resumeId = $('#resumeChoice').val();
+
+                    if (!resumeId || resumeId === "이력서를 선택해 주세요") {
+                        alert("이력서를 선택해 주세요.");
+                        return false;
+                    }
+
+                    // 서버로 중복 지원 여부 확인 요청
+                    $.ajax({
+                        type: "GET",
+                        url: "/checkApplyStatus",
+                        data: {resumeId: resumeId},
+                        success: function (response) {
+                            if (response.applied) {
+                                // 중복 지원이 감지되면 알림을 표시하고 이력서 선택을 다시 가능하게 합니다.
+                                alert('해당 이력서로 이미 지원한 채용공고입니다.');
+                                // 이력서 선택을 초기화합니다.
+                                $('#resumeChoice').val('이력서를 선택해 주세요');
+                                return false;
+                            } else {
+                                // 중복 지원이 아니라면 폼을 서버로 제출합니다.
+                                $('#applyForm').submit();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+            </script>
             <div class="pt-2 mt-3">
                 <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
                     <div>
@@ -53,7 +87,8 @@
                         </tr>
                         <tr>
                             <td>회사명</td>
-                            <td><a href="#" style=" color: black; font-weight: bold;">{{scrap.post.user.companyName}}</a>
+                            <td><a href="#"
+                                   style=" color: black; font-weight: bold;">{{scrap.post.user.companyName}}</a>
                             </td>
                             <!-- TODO: 가능하다면 이 회사의 진행 중인 채용 공고 모음을 만들어보자 -->
                         </tr>
