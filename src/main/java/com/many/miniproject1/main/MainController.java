@@ -181,11 +181,10 @@ public class MainController {
      *  /person/matching도 마찬가지이니 담당자는 반드시 체크할 것!!!
      */
     @GetMapping("/company/matching")
-    public String matchingResumeForm(HttpServletRequest request) {
+    public String matchingResumeForm(HttpServletRequest request, @RequestParam (value = "postChoice", defaultValue = "") Integer postChoice) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<Post> posts = mainService.findByUserIdPost(sessionUser.getId());
         request.setAttribute("posts", posts);
-        Integer postChoice = (Integer) session.getAttribute("postChoice");
         if (postChoice != null) {
             List<Resume> resumeList = mainService.matchingResume(postChoice);
             request.setAttribute("resumeList", resumeList);
@@ -193,34 +192,20 @@ public class MainController {
         return "company/matching";
     }
 
-    @PostMapping("/company/match")
-    public String matchingPost(int postChoice) {
-        session.setAttribute("postChoice", postChoice);
-        return "redirect:/company/matching";
-    }
+
 
     //맞춤 공고 - 개인이 보는 매칭 공고
     @GetMapping("/person/matching")
-    public String matchingPostForm(HttpServletRequest request) {
+    public String matchingPostForm(HttpServletRequest request, @RequestParam (value = "resumeChoice", defaultValue = "") Integer resumeChoice) {
         //공고 가져오기
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<Resume> resumeList = mainService.findByUserIdResume(sessionUser.getId());
         request.setAttribute("resumeList", resumeList);
-        Integer resumeChoice = (Integer) session.getAttribute("resumeChoice");
         if (resumeChoice != null) {
             List<Post> postList = mainService.matchingPost(resumeChoice);
             request.setAttribute("postList", postList);
         }
-
         return "person/matching";
     }
 
-    @PostMapping("/person/match")
-    public String matchingResume(int resumeChoice) {
-        session.setAttribute("resumeChoice", resumeChoice);
-        return "redirect:/person/matching";
-    }
 }
-
-
-
