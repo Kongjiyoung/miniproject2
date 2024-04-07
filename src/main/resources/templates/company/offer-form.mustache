@@ -1,4 +1,4 @@
-{{> /layout/header}}
+{{> layout/header}}
 
 <div class="container d-flex">
     <div class="justify-content-center mx-2 pb-4 w-100">
@@ -64,15 +64,10 @@
 
         </div>
     </div>
-    <div class="list-group mx-2">
-        <a href="/company/info" class="list-group-item shadow " style="width: 180px;">회사 정보 관리</a>
-        <a href="/company/post" class="list-group-item shadow">공고 관리</a>
-        <a href="/company/resume" class="list-group-item hs_list_effect shadow">받은 이력서</a>
-        <a href="/company/scrap" class="list-group-item shadow">스크랩한 이력서</a>
-        <a href="/company/offers" class="list-group-item shadow">제안한 이력서</a>
-    </div>
+    {{> layout/company-menu}}
+
 
 </div>
 
 
-{{> /layout/footer}}
+{{> layout/footer}}

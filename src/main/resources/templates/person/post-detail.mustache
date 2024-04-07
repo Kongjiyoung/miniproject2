@@ -29,11 +29,11 @@
             {{#sessionuser}}
                 {{^isMatchingCompany}}
                     <!-- 이력서 선택/보내기 -->
-                    <form class="row d-flex justify-content-end g-3" action="/posts/{{post.id}}/apply" method="post">
+                    <form id="searchForm" class="row d-flex justify-content-end g-3" action="/posts/{{post.id}}/apply" method="post">
                         <div class="col-auto">
                             <select class="form-select" aria-label="Default select example"
                                     id="resumeChoice" name="resumeChoice">
-                                <option selected>이력서 선택</option>
+                                <option selected disabled>이력서 선택</option>
                                 {{#resumeList}}
                                     <option value="{{id}}">{{title}}</option>
                                 {{/resumeList}}
@@ -46,6 +46,20 @@
                     </form>
                 {{/isMatchingCompany}}
             {{/sessionuser}}
+            <script>
+                $("#searchForm").submit(function () {
+                    let selectedOption = $("#postChoice").val();
+                    if (!selectedOption) {
+                        alert("이력서를 선택해 주세요.");
+                        return false;
+                    }
+                });
+                $("#postChoice").change(function () {
+                    let selectedOption = $(this).val();
+                    let searchButton = $("#searchButton");
+                    searchButton.prop("disabled", !selectedOption);
+                });
+            </script>
             {{#post}}
                 <div class="pt-5 mt-3">
                     <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
