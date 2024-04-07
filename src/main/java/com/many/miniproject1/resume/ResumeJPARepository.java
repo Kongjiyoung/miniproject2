@@ -12,6 +12,14 @@ import java.util.Optional;
 
 public interface ResumeJPARepository extends JpaRepository<Resume, Integer> {
 
+    @Query("""
+            SELECT distinct r
+            FROM Resume r
+            JOIN FETCH r.user ru
+            WHERE r.title like concat('%', :title, '%')
+            """)
+    List<Resume> findByTitle(@Param("title") String title);
+
     // TODO: 이유 없으면 삭제하기 distinct
     @Query("""
             select distinct r

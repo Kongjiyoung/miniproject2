@@ -28,6 +28,8 @@ import com.many.miniproject1.user.UserJPARepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class MainService {
     private final UserJPARepository userJPARepository;
     private final SkillJPARepository skillJPARepository;
     private final UserService userService;
+
+
 
     public List<MainResponse.mainResumesDTO> mainResumes() {
         List<Resume> mainResumes = resumeJPARepository.mainAllResume();
@@ -177,9 +181,17 @@ public class MainService {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         return resumeJPARepository.findAll(sort);
     }
+
+    public List<Resume> resumeSearchForm(String title) {
+        return resumeJPARepository.findByTitle(title);
+    }
     public List<Post> postForm() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         return postJPARepository.findAll(sort);
+    }
+
+    public List<Post> postSearchForm(String title) {
+        return postJPARepository.findByTitle(title);
     }
 
     public MainResponse.MainResumeDetailDTO getResumeDetail(Integer resumeId) {
