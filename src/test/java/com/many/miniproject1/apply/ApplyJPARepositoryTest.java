@@ -75,7 +75,7 @@ public class ApplyJPARepositoryTest {
         applyJPARepository.findAllAppliesWithPostsAndSkills(id);
 
         // then
-        System.out.println("findAllAppliesWithPostsAndSkills_test ❤ : " + applyJPARepository.findAllAppliesWithPostsAndSkills(id));
+//        System.out.println("findAllAppliesWithPostsAndSkills_test ❤ : " + applyJPARepository.findAllAppliesWithPostsAndSkills(id));
     }
     @Test
     public void findByApply_test(){
@@ -83,7 +83,7 @@ public class ApplyJPARepositoryTest {
         int id = 1;
         // when
         Apply apply = applyJPARepository.findByResumeIdJoinSkillAndCompany(id);
-        System.out.println("test: " + apply);
+//        System.out.println("test: " + apply);
 
         // then
 

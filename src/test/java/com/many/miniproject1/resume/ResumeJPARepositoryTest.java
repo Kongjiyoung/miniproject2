@@ -48,7 +48,6 @@ public class ResumeJPARepositoryTest {
         Resume updatedResume = updatedOptionalResume.get();
         // 저장된 이력서를 다시 가져와서 변경된 내용이 올바르게 반영되었는지 확인합니다.
         assertThat(updatedResume.getTitle()).isEqualTo(newTitle);
-        System.out.println("update_test: " + newTitle);
 
     }
 //    @Test
@@ -59,7 +58,6 @@ public class ResumeJPARepositoryTest {
 //        Optional<Resume> resumeOP = resumeJPARepository.findById(id);
 //        if (resumeOP.isPresent()) {
 //            Resume resume = resumeOP.get();
-//            System.out.println("findById_test: " + resume.getTitle());
 //        }
 //        // then
 //    }
@@ -81,7 +79,7 @@ public class ResumeJPARepositoryTest {
         resumeJPARepository.save(resume);
 
         // then
-        System.out.println("save_test = " + resume.getId());
+//        System.out.println("save_test = " + resume.getId());
 
     }
 
@@ -104,7 +102,7 @@ public class ResumeJPARepositoryTest {
         int id = 1;
             // when
         List<Resume> resumeList = resumeJPARepository.findByUserId(id);
-        System.out.println("test:: "+resumeList);
+//        System.out.println("test:: "+resumeList);
             // then
         }
 
