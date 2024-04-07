@@ -52,7 +52,7 @@ public class ApplyController {
     }
 
     @PostMapping("/company/resumes/{id}/is-pass")
-    public String companyPass(@PathVariable Integer id, @RequestBody ApplyRequest.UpdateIsPassDTO reqDTO) {
+    public String companyPass(@PathVariable Integer id,ApplyRequest.UpdateIsPassDTO reqDTO) {
 
 //        비행기 버튼 누르고 나서 어디로 가야하는지 잘 모르겠어서 현재 페이지로 남겨놓음(번복 가능)
         // 목적: 합격/불합격 버튼을 누르면 받은 지원받은 이력서 디테일 페이지에 합격/불합격 상태가 뜨고
