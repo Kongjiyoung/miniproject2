@@ -7,7 +7,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PostJPARepository extends JpaRepository<Post, Integer> {
-
+    @Query("""
+            SELECT distinct p
+            FROM Post p
+            JOIN FETCH p.user pu
+            WHERE p.title like concat('%', :title, '%')
+            """)
+    List<Post> findByTitle(@Param("title") String title);
     @Query("""
             select distinct p from Post p join fetch p.skillList s join fetch p.user u where u.id= :id
             """)
