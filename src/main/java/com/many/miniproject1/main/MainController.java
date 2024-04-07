@@ -128,6 +128,9 @@ public class MainController {
                 isCompany = true;
             }
         }
+        request.setAttribute("isMatchingCompany", isCompany);
+        request.setAttribute("sessionuser", sessionUser);
+
 
         if (search != null){
             List<Post> postList = mainService.postSearchForm(search);
@@ -136,8 +139,6 @@ public class MainController {
         }
         List<Post> postList = mainService.postForm();
         request.setAttribute("postList", postList);
-        request.setAttribute("isMatchingCompany", isCompany);
-        request.setAttribute("sessionuser", sessionUser);
 
         return "person/main";
     }

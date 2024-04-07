@@ -19,13 +19,13 @@
                         </form>
                     </div>
                     <hr class="d-inline-flex w-100">
-                    <form class="row d-flex justify-content-end g-3 align-items-center"
+                    <form id="searchForm" class="row d-flex justify-content-end g-3 align-items-center"
                           action="/person/scrap/{{id}}/detail/apply" method="post">
                         <div class="col-auto">
                             <select class="form-select form-select-sm" aria-label="Default select example"
                                     id="resumeChoice"
                                     name="resumeChoice">
-                                <option selected>이력서를 선택해 주세요</option>
+                                <option selected disabled>이력서를 선택해 주세요</option>
                                 {{#resumeList}}
                                     <option value="{{id}}">{{title}}</option>
                                 {{/resumeList}}
@@ -38,6 +38,20 @@
                         </div>
                     </form>
                 </div>
+                <script>
+                    $("#searchForm").submit(function () {
+                        let selectedOption = $("#postChoice").val();
+                        if (!selectedOption) {
+                            alert("이력서를 선택해 주세요.");
+                            return false;
+                        }
+                    });
+                    $("#postChoice").change(function () {
+                        let selectedOption = $(this).val();
+                        let searchButton = $("#searchButton");
+                        searchButton.prop("disabled", !selectedOption);
+                    });
+                </script>
                 <div class="pt-2 mt-3">
                     <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
                         <div>
@@ -98,13 +112,8 @@
 
     </div>
     <!-- list-group( 오른쪽 바로가기) 시작 -->
-    <div class="list-group mx-2">
-        <a href="/person/info" class="list-group-item shadow " style="width: 150px;">회원정보관리</a>
-        <a href="/person/resumes" class="list-group-item shadow">이력서관리</a>
-        <a href="/person/scraps" class="list-group-item hs_list_effect shadow">스크랩한 공고</a>
-        <a href="/person/offers" class="list-group-item shadow">받은 제안</a>
-        <a href="/person/applies" class="list-group-item shadow">지원 현황</a>
-    </div>
+    {{> layout/person-menu}}
+
     <!-- list-group( 오른쪽 바로가기) 끝 -->
 </div>
 
