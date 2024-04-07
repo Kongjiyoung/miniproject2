@@ -109,9 +109,12 @@ public class MainController {
 
     //메인 채용 공고
     @GetMapping({"/person/main", "/"})
-    public String postForm(HttpServletRequest request) {
+    public String postForm(
+            MainRequest.MainDTO requestDTO,
+            HttpServletRequest request) {
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println("..........................................." + requestDTO);
 
         //기업인지 개인인지 구분
         Boolean isCompany = false;
@@ -123,7 +126,6 @@ public class MainController {
                 isCompany = true;
             }
         }
-
 
         List<Post> postList = mainService.postForm();
         request.setAttribute("postList", postList);

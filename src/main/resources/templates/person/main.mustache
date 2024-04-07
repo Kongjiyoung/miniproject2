@@ -18,12 +18,13 @@
 
     </ul>
 </div>
-<div class="container align-items-center mt-3 border p-3" style="border-radius: 10px;">
-    <h5 class="pb-2">맞춤 검색</h5>
-    <form>
+<form action="/" method="get">
+    <div class="container align-items-center mt-3 border p-3" style="border-radius: 10px;">
+        <h5 class="pb-2">맞춤 검색</h5>
         <div class="search-top mb-3">
             <div class=" company search d-flex " role="search">
-                <input class="form-control me-2" type="search" placeholder="회사/채용공고로 검색" aria-label="Search"/>
+                <input class="form-control me-2" name="keyword" type="search" placeholder="회사/채용공고로 검색"
+                       aria-label="Search"/>
                 <button class="btn btn-outline-success" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -32,34 +33,38 @@
         <div class="search-mid mb-3">
             <div class="d-flex justify-content-between">
                 <div style="width: 100%;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>직군.직무</option>
-                        <option value="1">프론트엔드</option>
-                        <option value="2">백엔드</option>
-                        <option value="3">엔지니어</option>
+                    <select name="title" class="form-select" aria-label="Default select example">
+                        <optgroup label="직군/직무">
+                            <option value="프론트엔드">프론트엔드</option>
+                            <option value="백엔드">백엔드</option>
+                            <option value="엔지니어">엔지니어</option>
+                        </optgroup>
                     </select>
                 </div>
                 <div style="width: 100%;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>경력.지역</option>
-                        <option value="1">경력무관</option>
-                        <option value="2">인턴</option>
-                        <option value="3">신입(1년 이하)</option>
-                        <option value="4">주니어(1~3년)</option>
-                        <option value="5">미들(9년 이상)</option>
-                        <option value="6">Lead레벨</option>
+                    <select name="career" class="form-select" aria-label="Default select example">
+                        <optgroup label="경력">
+                            <option value="">경력 무관</option>
+                            <option value="인턴">인턴</option>
+                            <option value="신입(1년 이하)">신입(1년 이하)</option>
+                            <option value="주니어(1~3년)">주니어(1~3년)</option>
+                            <option value="미들 (4~8년)">미들 (4~8년))</option>
+                            <option value="시니어 (9년 이상)">시니어 (9년 이상)</option>
+                        </optgroup>
                     </select>
                 </div>
             </div>
         </div>
         <div class="search-bottom d-flex justify-content-around align-items-center">
             <div style="width: 30%;">
+                <!--
                 <div class=" company search d-flex " role="search">
                     <input class="form-control me-2" type="search" placeholder="기술 스택" aria-label="Search"/>
                     <button class="btn btn-outline-success" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
+                -->
             </div>
             <div class="row row-cols-auto gap-3 justify-content-center my-3" style="width: 70%;">
                 <input type="checkbox" class="btn-check" id="btn1" value="java" name="skills" autocomplete="off"/>
@@ -84,8 +89,8 @@
                 <label class="btn btn-outline-primary" for="btn10">Flutter</label>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 <section class="container grid-gap: 50px; mt-5">
     <ul class="row row-cols-4 gap-3">
         <!-- 구인공고 시작 -->
@@ -93,7 +98,8 @@
             <li class="card col" style="width: 15rem; padding: 0px !important; border: 0">
                 <a href="/posts/{{id}}" style="text-decoration: none; color: black">
                     <div style="width: 100%; height: 10rem; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                        <img src="/images/{{profile}}" class="card-img-top" style="width: auto; height: 100%;" alt="이력서 사진"/>
+                        <img src="/images/{{profile}}" class="card-img-top" style="width: auto; height: 100%;"
+                             alt="이력서 사진"/>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><b style="
