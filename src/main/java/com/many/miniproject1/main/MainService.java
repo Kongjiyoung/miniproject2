@@ -13,6 +13,7 @@ import com.many.miniproject1.offer.OfferJPARepository;
 import com.many.miniproject1.offer.OfferRequest;
 import com.many.miniproject1.post.Post;
 import com.many.miniproject1.post.PostJPARepository;
+import com.many.miniproject1.post.PostQueryRepository;
 import com.many.miniproject1.resume.Resume;
 import com.many.miniproject1.resume.ResumeJPARepository;
 import com.many.miniproject1.scrap.Scrap;
@@ -46,6 +47,7 @@ public class MainService {
     private final ScrapJPARepository scrapJPARepository;
     private final ResumeJPARepository resumeJPARepository;
     private final PostJPARepository postJPARepository;
+    private final PostQueryRepository postQueryRepository;
     private final UserJPARepository userJPARepository;
     private final SkillJPARepository skillJPARepository;
     private final UserService userService;
@@ -180,6 +182,16 @@ public class MainService {
     public List<Post> postForm() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         return postJPARepository.findAll(sort);
+    }
+    public List<Post> postForm(MainRequest.SearchDTO requestDTO) {
+        List<Object[]> results = postQueryRepository.findAllWithKeywords(requestDTO);
+        // List<Integer> postIdList = new ArrayList<>();
+        List<Post> postList = new ArrayList<>();
+        for (Object[] result : results) {
+            // postIdList.add((Integer) result[0]);
+            postList.add(postJPARepository.findById((Integer) result[0]).get());
+        }
+        return postList;
     }
 
     public MainResponse.MainResumeDetailDTO getResumeDetail(Integer resumeId) {
