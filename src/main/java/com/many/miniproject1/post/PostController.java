@@ -60,7 +60,6 @@ public class PostController {
     @PostMapping("/company/posts/{id}/update")
     public String companyUpdatePost(@PathVariable int id, PostRequest.UpdatePostDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        System.out.println(reqDTO);
         postService.updatePost(id, sessionUser.getId(), reqDTO);
 
         return "redirect:/company/posts/" + id;

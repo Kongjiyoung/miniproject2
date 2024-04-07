@@ -125,7 +125,6 @@ public class UserController {
     public String personInfoUpdate(UserRequest.PersonUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.CompanyDTO newSessionUser = userService.personUpdate(sessionUser.getId(), reqDTO);
-        System.out.println(newSessionUser);
         session.setAttribute("newSessionUser", newSessionUser);
         return "redirect:/person/info";
     }

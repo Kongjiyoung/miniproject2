@@ -50,7 +50,6 @@ public class MainController {
         //기업인지 개인인지 구분
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            System.out.println(role);
 
             if (role.equals("company")) {
                 isCompany = true;
@@ -122,7 +121,6 @@ public class MainController {
         Boolean isCompany = false;
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            System.out.println(role);
 
             if (role.equals("company")) {
                 isCompany = true;

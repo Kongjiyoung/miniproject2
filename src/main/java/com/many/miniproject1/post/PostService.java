@@ -94,11 +94,9 @@ public class PostService {
 
         // 4. 스킬 업데이트
         List<Skill> skills = skillJPARepository.findSkillsByPostId(post.getId());
-        System.out.println(skills);
 //        for (Skill skill : skills) {
         skillJPARepository.deleteSkillsByPostId(post.getId());
 //        }
-        System.out.println(skills);
         List<Skill> skills1 = new ArrayList<>();
         for (String skillName : reqDTO.getSkills()) {
             SkillRequest.UpdatePostSkillsDTO skill = new SkillRequest.UpdatePostSkillsDTO();
@@ -106,7 +104,6 @@ public class PostService {
             skill.setSkill(skillName);
             skills1.add(skill.toEntity());
         }
-        System.out.println(skills);
         List<Skill> skillList = skillJPARepository.saveAll(skills1);
         return post;
     }

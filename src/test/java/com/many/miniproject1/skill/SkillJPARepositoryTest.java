@@ -34,7 +34,6 @@ public class SkillJPARepositoryTest {
         skillJPARepository.saveAll(skills);
 
         // then
-        System.out.println("skills = " + skillJPARepository.findAll());
     }
 
     @Test

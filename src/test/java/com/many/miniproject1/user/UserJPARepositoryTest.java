@@ -31,7 +31,6 @@ public class UserJPARepositoryTest {
 
         if (userOP.isPresent()) {
             User user = userOP.get();
-            System.out.println("findById_test : " + user.getUsername());
         }
 
         // then
@@ -45,7 +44,6 @@ public class UserJPARepositoryTest {
         String password = "1234";
         // when
         User user = userJPARepository.findByUsernameAndPassword(username, password).get();
-        System.out.println("findByUsernameAndPassword_test: " + user);
         // then
         assertThat(user.getAddress()).isEqualTo("부산광역시");
     }
@@ -67,7 +65,6 @@ public class UserJPARepositoryTest {
         userJPARepository.save(user);
 
         // then
-        System.out.println("save_test: " + user);
         assertThat(user.getRole()).isEqualTo("person");
     }
 }

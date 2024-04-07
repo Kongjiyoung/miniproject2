@@ -46,7 +46,7 @@ public class ScrapJPARepositoryTest {
         int resumeId = 1;
         // when
         List<Scrap> scrapList = scrapJPARepository.findByUserIdJoinSkillAndResume(resumeId);
-        System.out.println("test:::" + scrapList);
+//        System.out.println("test:::" + scrapList);
         // then
     }
 
@@ -77,7 +77,6 @@ public class ScrapJPARepositoryTest {
 
         // then
 //        assertThat(offer.);
-        System.out.println("👩👴🧓👱‍♀️👼🎅👸🤴승호" + offer);
     }
 
     @Test
@@ -100,7 +99,7 @@ public class ScrapJPARepositoryTest {
         int id = 1;
             // when
         List<Scrap> scrapList = scrapJPARepository.findByCompanyIdJoinSkills(id);
-        System.out.println("test::" +scrapList);
+//        System.out.println("test::" +scrapList);
             // then
         }
 }
