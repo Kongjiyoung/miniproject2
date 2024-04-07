@@ -28,12 +28,12 @@
             <!-- 제안, 스크랩 버튼 -->
             {{#sessionuser}}
                 {{#isMatchingCompany}}
-                    <form class="row d-flex justify-content-end g-3" action="/resumes/{{resume.id}}/offer"
+                    <form id="searchForm" class="row d-flex justify-content-end g-3" action="/resumes/{{resume.id}}/offer"
                           method="post">
                         <div class="col-auto">
                             <select class="form-select" aria-label="Default select example" id="postChoice"
                                     name="postChoice">
-                                <option selected>채용 공고 선택</option>
+                                <option selected disabled>채용 공고 선택</option>
                                 {{#postList}}
                                     <option value="{{id}}">{{title}}</option>
                                 {{/postList}}
@@ -47,6 +47,20 @@
                     </form>
                 {{/isMatchingCompany}}
             {{/sessionuser}}
+            <script>
+                $("#searchForm").submit(function () {
+                    let selectedOption = $("#postChoice").val();
+                    if (!selectedOption) {
+                        alert("채용 공고를 선택해 주세요.");
+                        return false;
+                    }
+                });
+                $("#postChoice").change(function () {
+                    let selectedOption = $(this).val();
+                    let searchButton = $("#searchButton");
+                    searchButton.prop("disabled", !selectedOption);
+                });
+            </script>
             {{#resume}}
                 <div class="pt-5 mt-3">
                     <div class="border border-tertiary px-3 py-3 pt-3 d-inline-flex ms-2 me-3 mb-3 w-100">
