@@ -52,7 +52,6 @@ public class ResumeController {
     // 수정
     @PostMapping("/person/resume/{id}/detail/update")
     public String personUpdateResume(@PathVariable int id, ResumeRequest.UpdateDTO reqDTO) {
-//        System.out.println("requestDTO = " + reqDTO);
 //        User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.update(id, reqDTO);
         return "redirect:/person/resume/" + id + "/detail";

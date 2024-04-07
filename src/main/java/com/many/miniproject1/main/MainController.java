@@ -43,14 +43,13 @@ public class MainController {
 
     //메인 구직 공고
     @GetMapping("/company/main")
-    public String resumeForm(HttpServletRequest request) {
+    public String resumeForm(HttpServletRequest request, @RequestParam(value = "search", defaultValue = "") String search) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         Boolean isCompany = false;
         //기업인지 개인인지 구분
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            System.out.println(role);
 
             if (role.equals("company")) {
                 isCompany = true;
@@ -60,6 +59,11 @@ public class MainController {
         request.setAttribute("isMatchingCompany", isCompany);
         request.setAttribute("sessionuser", sessionUser);
 
+        if (search != null){
+            List<Resume> resumeList = mainService.resumeSearchForm(search);
+            request.setAttribute("resumeList", resumeList);
+            return "company/main";
+        }
         List<Resume> resumeList = mainService.resumeForm();
         request.setAttribute("resumeList", resumeList);
 
@@ -113,6 +117,7 @@ public class MainController {
             boolean toSearch,
             MainRequest.SearchDTO requestDTO,
             HttpServletRequest request) {
+
         // 목적: 개인 회원 로그인/비회원 로그인 시 공고들이 보임
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -120,7 +125,6 @@ public class MainController {
         Boolean isCompany = false;
         if (sessionUser != null) {
             String role = sessionUser.getRole();
-            System.out.println(role);
 
             if (role.equals("company")) {
                 isCompany = true;
@@ -133,9 +137,8 @@ public class MainController {
             postList = mainService.postForm(requestDTO);
         }
 
+
         request.setAttribute("postList", postList);
-        request.setAttribute("isMatchingCompany", isCompany);
-        request.setAttribute("sessionuser", sessionUser);
 
         return "person/main";
     }
@@ -198,12 +201,6 @@ public class MainController {
             request.setAttribute("resumeList", resumeList);
         }
         return "company/matching";
-    }
-
-    @PostMapping("/company/match")
-    public String matchingPost(int postChoice) {
-        session.setAttribute("postChoice", postChoice);
-        return "redirect:/company/matching";
     }
 
     //맞춤 공고 - 개인이 보는 매칭 공고

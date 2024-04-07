@@ -54,36 +54,9 @@
     </section>
 
     <!-- list-group( 오른쪽 바로가기) 시작 -->
-    <div class="list-group mx-2">
-        <a href="/person/info" class="list-group-item shadow " style="width: 150px;">회원정보관리</a>
-        <a href="/person/resume" class="list-group-item shadow">이력서관리</a>
-        <a href="/person/scrap" class="list-group-item hs_list_effect shadow">스크랩한 공고</a>
-        <a href="/person/offers" class="list-group-item shadow">받은 제안</a>
-        <a href="/person/applies" class="list-group-item shadow">지원 현황</a>
-    </div>
+    {{> layout/person-menu}}
+
     <!-- list-group( 오른쪽 바로가기) 끝 -->
 </div>
-<div class="container mt-5 mb-5">
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">이전</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">다음</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<!-- 페이지네이션 -->
 
 {{> layout/footer}}

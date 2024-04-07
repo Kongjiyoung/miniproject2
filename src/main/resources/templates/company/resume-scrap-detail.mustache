@@ -19,12 +19,12 @@
                         </form>
                     </div>
                     <hr class="d-inline-flex w-100">
-                    <form class="row d-flex justify-content-end g-3 align-items-center"
+                    <form id="searchForm" class="row d-flex justify-content-end g-3 align-items-center"
                           action="/company/scrap/{{id}}/detail/offer" method="post">
                         <div class="col-auto">
                             <select class="form-select form-select-sm" aria-label="Default select example"
                                     id="postChoice" name="postChoice">
-                                <option selected>채용 공고를 선택해주세요</option>
+                                <option selected disabled>채용 공고를 선택해주세요</option>
                                 {{#postList}}
                                     <option value="{{id}}">{{title}}</option>
                                 {{/postList}}
@@ -36,9 +36,21 @@
                             </button>
                         </div>
                     </form>
-
                 </div>
-
+                <script>
+                    $("#searchForm").submit(function () {
+                        let selectedOption = $("#postChoice").val();
+                        if (!selectedOption) {
+                            alert("채용 공고를 선택해 주세요.");
+                            return false;
+                        }
+                    });
+                    $("#postChoice").change(function () {
+                        let selectedOption = $(this).val();
+                        let searchButton = $("#searchButton");
+                        searchButton.prop("disabled", !selectedOption);
+                    });
+                </script>
 
                 <div class="d-flex justify-content-center">
                     <div style="width: 85%;">
@@ -105,13 +117,8 @@
         {{/scrap}}
     </div>
     <!-- list-group( 오른쪽 바로가기) 시작 -->
-    <div class="list-group mx-2">
-        <a href="/company/info" class="list-group-item shadow " style="width: 180px;">회사 정보 관리</a>
-        <a href="/company/post" class="list-group-item shadow">공고 관리</a>
-        <a href="/company/resume" class="list-group-item hs_list_effect shadow">받은 이력서</a>
-        <a href="/company/scrap" class="list-group-item shadow">스크랩한 이력서</a>
-        <a href="/company/offers" class="list-group-item shadow">제안한 이력서</a>
-    </div>
+    {{> layout/company-menu}}
+
     <!-- list-group( 오른쪽 바로가기) 끝 -->
 </div>
 {{> layout/footer}}

@@ -43,7 +43,7 @@ public class PostJPARepositoryTest {
 
         // when
         Post post = postJPARepository.findByIdJoinSkillAndCompany(id);
-        System.out.println("test::" +post);
+//        System.out.println("test::" +post);
 
         // then
         assertThat(post.getId()).isEqualTo(1);
@@ -71,7 +71,7 @@ public class PostJPARepositoryTest {
         List<Post> postList = postJPARepository.findAllPost();
 
         // then
-        System.out.println("findAllPost_test: " + postList);
+//        System.out.println("findAllPost_test: " + postList);
         assertThat(postList.size()).isEqualTo(13);
     }
 
@@ -84,9 +84,7 @@ public class PostJPARepositoryTest {
         Post post = postJPARepository.findByPostIdJoinUserAndSkill(id);
 
         // then
-        System.out.println("findByPostIdJoinUserAndSkill_test: " + post);
-        System.out.println("유저: " + post.getUser());
-        System.out.println("스킬리스트: " + post.getSkillList());
+
         assertThat(post.getTitle()).isEqualTo("데이터 분석가");
         assertThat(post.getUser().getName()).isEqualTo("김인사");
         assertThat(post.getSkillList().size()).isEqualTo(3);
@@ -97,7 +95,7 @@ public class PostJPARepositoryTest {
         int id = 14;
             // when
         List<Post> postList = postJPARepository.findByPost(id);
-        System.out.println("test::" + postList);
+//        System.out.println("test::" + postList);
             // then
         }
 }

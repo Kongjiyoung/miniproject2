@@ -25,9 +25,9 @@ public class OfferJPARepositoryTest {
         Offer offedResumeDetail = offerJPARepository.findByIdJoinResumeAndSkillAndUser(reqDTO.getId());
 
         // then
-        System.out.println("findByIdJoinResumeAndSkillAndUser_test: " + offedResumeDetail);
-        System.out.println("유저: " + offedResumeDetail.getResume().getUser());
-        System.out.println("스킬리스트: " + offedResumeDetail.getResume().getSkillList());
+//        System.out.println("findByIdJoinResumeAndSkillAndUser_test: " + offedResumeDetail);
+//        System.out.println("유저: " + offedResumeDetail.getResume().getUser());
+//        System.out.println("스킬리스트: " + offedResumeDetail.getResume().getSkillList());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class OfferJPARepositoryTest {
         int id = 1;
         // when
         List<Offer> offerList = offerJPARepository.findByPostIdJoinPost(id);
-        System.out.println(offerList);
+//        System.out.println(offerList);
         // then
     }
 

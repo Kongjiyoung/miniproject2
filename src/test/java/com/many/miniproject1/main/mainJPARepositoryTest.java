@@ -46,7 +46,7 @@ public class mainJPARepositoryTest {
         Offer offer = offerJPARepository.save(scrapOfferDTO.toEntity());
 
         // then
-        System.out.println("승호 : "+ offer);
+//        System.out.println("승호 : "+ offer);
     }
 
     @Test
@@ -64,6 +64,6 @@ public class mainJPARepositoryTest {
         Scrap scrap = scrapJPARepository.save(mainScrapDTO.toEntity());
 
         // then
-        System.out.println("승호 : " + scrap);
+//        System.out.println("승호 : " + scrap);
     }
 }
