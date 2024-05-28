@@ -1,3 +1,6 @@
+
+![1_편집_1](https://github.com/Kongjiyoung/miniproject2/assets/153582359/d4ea401e-7c6e-4d87-9d1a-bc83e8718280)
+
 # 미니프로젝트2 - 이력서 관리 사이트
 
 ![logo](https://github.com/Kongjiyoung/miniproject2/assets/153582359/5727cba0-d9c3-45e2-ab1e-d8a200cef3de)
@@ -7,6 +10,32 @@ https://www.youtube.com/watch?v=K1W2FwS_Kqo
 
 ## 2. 발표자료
 [미니프로젝트1조.pptx](https://github.com/Kongjiyoung/miniproject/files/14600963/1.pptx)
+
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/001f26bd-786a-4d32-80cf-eab2606802a1" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/78755feb-69cc-4f36-a8f8-8433a1dc4471" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/83645199-388f-4a04-97c9-49a97a8a9224" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/f229fefe-388a-4508-b7bf-7b7937b0e314" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/3b47ad57-2381-4aa1-8047-05d6d7770bb2" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/3a0d6740-ee77-46d4-ab49-e508e0bc8089" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/3c824fa1-4ee8-424a-86b8-587c606cb04c" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/091d2fda-92fd-41d9-818e-1865b70b8b39" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/fe32ef93-f802-4a33-902e-315dad6b90fc" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/f189097e-0d0a-4996-933a-0b2c8fe9f972" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/ffe2b2fc-c876-4599-b46a-6de4df2d6d07" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/5edefda5-a878-40e3-8546-071e98cc4d10" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/adcfef27-979c-471f-913f-6dce0407e0ae" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/f6c136fe-fdac-4607-b87c-475e713f3602" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/7a6f188b-687a-44df-b669-7277bc6bbd93" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/c35ec3da-959e-4a84-8445-21b6532fe685" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/5d0b5122-0432-4151-bdfb-d3d7d2dab1af" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/37a5f7d6-2ab6-4f3a-b0eb-b08499e84a3a" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/038a5826-bd12-4290-bca0-51f67351faaf" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/eb09ca79-dde4-4b02-8a74-0c751833f253" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/b4f8d8ea-e63a-4d2f-a4f7-cdc521d8387b" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/8c5baf35-e163-4f42-994c-634f62975d94" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/87cff6f5-269c-4972-8ea2-a16e67dee72a" width="400">
+<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/fb10e91b-cd73-4eda-b289-0b94e6b86eea" width="400">
+
 
 ## 3. 팀소개 및 각자 맡은 기능
 ## 3-1. JPA
