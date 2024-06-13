@@ -8,6 +8,53 @@
 ## 1. 시연영상
 https://www.youtube.com/watch?v=K1W2FwS_Kqo
 
+### 1. 회원가입
+|개인|기업|
+|------|---|
+|![1  개인 회원가입](https://github.com/Kongjiyoung/miniproject2/assets/52162820/2fdb0aa7-145e-4fe9-8c8d-4b4e4d03bbf0)|![1  기업 회원가입](https://github.com/Kongjiyoung/miniproject2/assets/52162820/bf41221d-0e7e-4fd3-83a1-4a8e7f8a9132)|
+
+### 2. 로그인
+|개인|기업|
+|------|---|
+|![2  개인 로그인](https://github.com/Kongjiyoung/miniproject2/assets/52162820/f44603a2-42e5-4002-a77c-ef2ead17a1e8)|![2  기업 로그인](https://github.com/Kongjiyoung/miniproject2/assets/52162820/a3c75b90-be67-43cd-8734-d334a0815a69)|
+
+### 3. 회원정보 관리
+|개인|기업|
+|------|---|
+|![3  개인 회원정보관리](https://github.com/Kongjiyoung/miniproject2/assets/52162820/90b417ab-335a-461c-97d7-aee6ae8582fb)|![3  기업 정보 관리](https://github.com/Kongjiyoung/miniproject2/assets/52162820/bcb94166-f8ae-44f8-949c-618fcda79352)|
+
+### 4. 이력서, 공고 관리
+|개인|기업|
+|------|---|
+|![4  이력서 관리](https://github.com/Kongjiyoung/miniproject2/assets/52162820/d1d6863f-61f6-49cc-9329-0dacb3907eaf)|![4  기업 공고 관리](https://github.com/Kongjiyoung/miniproject2/assets/52162820/724b529f-e2dc-4de6-aab4-85180c8b52bd)|
+|이력서 관리|공고 관리|
+
+### 5. 지원현황, 받은 이력서 확인
+|개인|기업|
+|------|---|
+|![6  개인 지원하기, 지원현황](https://github.com/Kongjiyoung/miniproject2/assets/52162820/9fc55ba5-0847-404f-a780-614f20f505b0)|![5  기업 받은 이력서](https://github.com/Kongjiyoung/miniproject2/assets/52162820/a92024c6-2620-4839-ab3f-43479f65fcc7)|
+|지원하기, 지원현황|받은 이력서 확인|
+
+### 6. 받은 제안, 제안한 이력서현황
+|개인|기업|
+|------|---|
+|![5  받은제안](https://github.com/Kongjiyoung/miniproject2/assets/52162820/3b4115eb-85cf-46bf-942e-eae8ebc74710)|![7  기업 제안한 이력서](https://github.com/Kongjiyoung/miniproject2/assets/52162820/9c95f7e3-2d5a-4b52-a0a7-62bde8b7a52c)|
+|받은 제안|공고제안하기, 제안한 이력서현황|
+
+### 7. 스크랩
+|개인|기업|
+|------|---|
+|![7  개인 스크랩하기](https://github.com/Kongjiyoung/miniproject2/assets/52162820/5a00a3eb-9089-49e6-a540-293fb1cfc72b)|![6  기업 스크랩한 이력서](https://github.com/Kongjiyoung/miniproject2/assets/52162820/3e8cbafd-8bad-45b8-b71f-749997237849)|
+
+### 8. 검색
+|개인|기업|
+|------|---|
+|![8  개인 공고 검색](https://github.com/Kongjiyoung/miniproject2/assets/52162820/538e8ed9-9484-491a-a325-011179358d4a)|![8  기업 이력서 검색](https://github.com/Kongjiyoung/miniproject2/assets/52162820/55a0169b-6882-4326-a485-09f304f70673)|
+
+### 9. 매칭
+![9  개인 매칭](https://github.com/Kongjiyoung/miniproject2/assets/52162820/2fa0a62d-c42d-48de-bff1-ec8e75792a3e)
+
+
 ## 2. 발표자료
 [미니프로젝트1조.pptx](https://github.com/Kongjiyoung/miniproject/files/14600963/1.pptx)
 |<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/001f26bd-786a-4d32-80cf-eab2606802a1" width="400">|<img src="https://github.com/Kongjiyoung/miniproject2/assets/153582359/78755feb-69cc-4f36-a8f8-8433a1dc4471" width="400">|
